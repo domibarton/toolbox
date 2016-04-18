@@ -1,0 +1,55 @@
+{% extends 'toolbox/base.html' %}
+{% load staticfiles %}
+
+{% block title %}List - Order Tracking{% endblock %}
+
+{% block head %}
+<link href="{% static 'ordertracking/css/order_list.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<h2>Order Tracking - List</h2>
+
+<table id="orderlist" class="table table-hover">
+    <thead>
+        <tr>
+            <th class="id">ID</th>
+            <th class="store">Store</th>
+            <th class="order-id">Order ID</th>
+            <th class="shipping-nr">Shipping Number</th>
+            <th class="brief">Brief</th>
+            <th class="order-date">Ordered</th>
+            <th class="shipping-date">Shipped</th>
+            <th class="arrival-date">Received</th>
+            <th class="duration">Dur.</th>
+            <th class="state">State</th>
+            <th class="complete">Complete</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for order in order_list %}
+        <tr>
+            <td><a href="{{ order.get_absolute_url }}">{{ order.id }}</a></td>
+            <td>{{ order.store }}</td>
+            <td><a href="{{ order.get_order_url }}" target="_blank">{{ order.order_id }}</a></td>
+            {% if order.shipping_nr %}
+                <td><a href="{{ order.get_shipping_url }}" target="_blank">{{ order.shipping_nr }}</a></td>
+            {% else %}
+                <td></td>
+            {% endif %}
+            <td>{{ order.brief }}</td>
+            <td>{{ order.order_date }}</td>
+            <td>{{ order.shipping_date|default:'' }}</td>
+            <td>{{ order.arrival_date|default:'' }}</td>
+            <td>{{ order.get_duration_days }}</td>
+            <td>{{ order.state }}</td>
+            {% if order.complete %}
+                <td class="text-success"><i class="fa fa-check"></i> complete</td>
+            {% else %}
+                <td class="text-danger"><i class="fa fa-times"></i> incomplete</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

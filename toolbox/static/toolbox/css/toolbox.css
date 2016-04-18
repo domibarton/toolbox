@@ -1,0 +1,15 @@
+table
+{
+    width: 100%;
+}
+
+dl.dl-horizontal dt
+{
+    text-align: left;
+    width: 100px;
+}
+
+dl.dl-horizontal dd
+{
+    margin-left: 120px;
+}

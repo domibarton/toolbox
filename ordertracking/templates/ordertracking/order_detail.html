@@ -1,0 +1,62 @@
+{% extends 'toolbox/base.html' %}
+
+{% block title %}Order {{ order }} - Order Tracking{% endblock %}
+
+{% block content %}
+<div class="pull-right">
+    <a class="btn btn-default btn-primary" href="{{ order.get_admin_url }}"><i class="fa fa-edit"></i> edit in admin GUI</a>
+</div>
+
+<h2>Order {{ order }}</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>
+            <i class="fa fa-cube"></i>
+            Description
+        </h3>
+        <p>
+            {{ order.brief }}
+        </p>
+        {% if order.description %}
+            <p>{{ order.description|linebreaks }}</p>
+        {% endif %}
+
+        {% if order.notes %}
+            <h3>
+                <i class="fa fa-sticky-note-o"></i>
+                Notes
+            </h3>
+            <p>{{ order.notes|linebreaks }}</p>
+        {% endif %}
+    </div>
+    <div class="col-md-4">
+        <h3>
+            <i class="fa fa-binoculars"></i>
+            State
+        </h3>
+        <dl class="dl-horizontal">
+            <dt>Order state</dt>
+            <dd>{{ order.state }}</dd>
+            <dt>Complete</dt>
+            <dd>{{ order.complete }}</dd>
+            {% if order.shipping_nr %}
+                <dt>Shipping#</dt>
+                <dd><a class="{{ order.get_shipping_url }}">{{ order.shipping_nr }}</a></dd>
+            {% endif %}
+        </dl>
+    </div>
+    <div class="col-md-4">
+        <h3><i class="fa fa-calendar"></i> Dates</h3>
+        <dl class="dl-horizontal">
+            <dt>Order date</dt>
+            <dd>{{ order.order_date }}</dd>
+            <dt>Shipping date</dt>
+            <dd>{{ order.shipping_date }}</dd>
+            <dt>Arrival date</dt>
+            <dd>{{ order.arrival_date }}</dd>
+        </dl>
+    </div>
+</div>
+
+{% endblock %}
