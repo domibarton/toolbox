@@ -8,6 +8,12 @@
 {% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
+<div class="pull-right">
+    <a href="{% url 'admin:ordertracking_order_add' %}" target="_blank" class="btn btn-default"><i class="fa fa-plus"></i> add</a>
+</div>
+{% endif %}
+
 <h2>Order Tracking - List</h2>
 
 <table id="orderlist" class="table table-hover">
@@ -24,7 +30,9 @@
             <th class="duration">Dur.</th>
             <th class="state">State</th>
             <th class="complete">Complete</th>
+            {% if user.is_authenticated %}
             <th class="edit"></th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -45,7 +53,9 @@
             <td class="duration">{{ order.get_duration_days }}</td>
             <td class="state">{% include 'ordertracking/snippets/order_state.html' %}</td>
             <td class="complete">{% include 'ordertracking/snippets/order_complete.html' %}</td>
+            {% if user.is_authenticated %}
             <td class="edit"><a href="{{ order.get_admin_url }}" target="_blank" class="btn btn-xs btn-default"><i class="fa fa-edit"></i> edit</a></td>
+            {% endif %}
         </tr>
     {% endfor %}
     </tbody>

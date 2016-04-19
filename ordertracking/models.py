@@ -6,6 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from datetime import date
 from toolbox.settings import SHIPPING_URL
 
+
 class State(models.Model):
     state    = models.CharField(max_length=16, unique=True)
     sort     = models.IntegerField(db_index=True)
@@ -50,7 +51,6 @@ class Order(models.Model):
 
     def get_absolute_url(self):
         return reverse('ordertracking:detail', kwargs={'pk': self.id})
-
 
     def get_admin_url(self):
         content_type = ContentType.objects.get_for_model(self.__class__)

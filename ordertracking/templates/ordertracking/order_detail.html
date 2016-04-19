@@ -1,11 +1,14 @@
 {% extends 'toolbox/base.html' %}
+{% load markdownify %}
 
 {% block title %}Order {{ order }} - Order Tracking{% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <div class="pull-right">
-    <a href="{{ order.get_admin_url }}" target="_blank" class="btn btn-default btn-default"><i class="fa fa-edit"></i> edit</a>
+    <a href="{{ order.get_admin_url }}" target="_blank" class="btn btn-default"><i class="fa fa-edit"></i> edit</a>
 </div>
+{% endif %}
 
 <h2>Order {{ order }}</h2>
 
@@ -19,7 +22,7 @@
             {{ order.brief }}
         </p>
         {% if order.description %}
-            <p>{{ order.description|linebreaks }}</p>
+            <p>{{ order.description|markdownify|safe }}</p>
         {% endif %}
 
         {% if order.notes %}
@@ -27,7 +30,7 @@
                 <i class="fa fa-sticky-note-o"></i>
                 Notes
             </h3>
-            <p>{{ order.notes|linebreaks }}</p>
+            <p>{{ order.notes|markdownify|safe }}</p>
         {% endif %}
     </div>
     <div class="col-md-4">
