@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="pull-right">
-    <a class="btn btn-default btn-primary" href="{{ order.get_admin_url }}"><i class="fa fa-edit"></i> edit in admin GUI</a>
+    <a href="{{ order.get_admin_url }}" target="_blank" class="btn btn-default btn-default"><i class="fa fa-edit"></i> edit</a>
 </div>
 
 <h2>Order {{ order }}</h2>

@@ -40,6 +40,11 @@ table#orderlist thead th.complete
     width: 85px;
 }
 
+table#orderlist thead th.edit
+{
+    width: 50px;
+}
+
 table#orderlist tbody td.complete span.label
 {
     width: 200px ! important;

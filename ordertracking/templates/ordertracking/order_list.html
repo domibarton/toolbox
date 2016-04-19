@@ -24,6 +24,7 @@
             <th class="duration">Dur.</th>
             <th class="state">State</th>
             <th class="complete">Complete</th>
+            <th class="edit"></th>
         </tr>
     </thead>
     <tbody>
@@ -44,6 +45,7 @@
             <td class="duration">{{ order.get_duration_days }}</td>
             <td class="state">{% include 'ordertracking/snippets/order_state.html' %}</td>
             <td class="complete">{% include 'ordertracking/snippets/order_complete.html' %}</td>
+            <td class="edit"><a href="{{ order.get_admin_url }}" target="_blank" class="btn btn-xs btn-default"><i class="fa fa-edit"></i> edit</a></td>
         </tr>
     {% endfor %}
     </tbody>
