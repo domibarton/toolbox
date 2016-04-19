@@ -1,0 +1,9 @@
+{% if order.complete %}
+    <span class="label label-success">
+        <i class="fa fa-check"></i> complete
+    </span>
+{% else %}
+    <span class="label label-danger">
+        <i class="fa fa-spin fa-spinner"></i> incomplete
+    </span>
+{% endif %}

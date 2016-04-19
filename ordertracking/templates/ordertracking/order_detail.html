@@ -37,9 +37,9 @@
         </h3>
         <dl class="dl-horizontal">
             <dt>Order state</dt>
-            <dd>{{ order.state }}</dd>
+            <dd>{% include 'ordertracking/snippets/order_state.html' %}</dd>
             <dt>Complete</dt>
-            <dd>{{ order.complete }}</dd>
+            <dd>{% include 'ordertracking/snippets/order_complete.html' %}</dd>
             {% if order.shipping_nr %}
                 <dt>Shipping#</dt>
                 <dd><a class="{{ order.get_shipping_url }}">{{ order.shipping_nr }}</a></dd>
@@ -52,9 +52,9 @@
             <dt>Order date</dt>
             <dd>{{ order.order_date }}</dd>
             <dt>Shipping date</dt>
-            <dd>{{ order.shipping_date }}</dd>
+            <dd>{{ order.shipping_date|default:'' }}</dd>
             <dt>Arrival date</dt>
-            <dd>{{ order.arrival_date }}</dd>
+            <dd>{{ order.arrival_date|default:'' }}</dd>
         </dl>
     </div>
 </div>

@@ -1,7 +1,15 @@
+/*
+ * Make all tables 100% width.
+ */
+
 table
 {
     width: 100%;
 }
+
+/*
+ * Prettify the default dl-horizontal list.
+ */
 
 dl.dl-horizontal dt
 {
@@ -12,4 +20,53 @@ dl.dl-horizontal dt
 dl.dl-horizontal dd
 {
     margin-left: 120px;
+}
+
+/*
+ * Make the default bootstrap label a bit brighter.
+ */
+
+span.label-default
+{
+    background-color: #aaa;
+}
+
+/*
+ * CSS3 blink animation.
+ */
+
+.blink
+{
+    animation-name                   : blink;
+    animation-duration               : 2s;
+    animation-timing-function        : linear;
+    animation-iteration-count        : infinite;
+
+    -webkit-animation-name           : blink;
+    -webkit-animation-duration       : 2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    -moz-animation-name              : blink;
+    -moz-animation-duration          : 2s;
+    -moz-animation-timing-function   : linear;
+    -moz-animation-iteration-count   : infinite;
+}
+
+@-moz-keyframes blink {
+    0%  { opacity: 1; }
+    25% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+@-webkit-keyframes blink {
+    0%  { opacity: 1; }
+    25% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+@keyframes blink {
+    0%  { opacity: 1; }
+    25% { opacity: 0; }
+    50% { opacity: 1; }
 }

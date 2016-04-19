@@ -1,0 +1,9 @@
+{% if order.complete or order.state.id == 1 %}
+    <span class="label label-default">
+        {{ order.state }}
+    </span>
+{% else %}
+    <span class="label label-danger blink">
+        {{ order.state }}
+    </span>
+{% endif %}

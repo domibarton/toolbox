@@ -1,3 +1,7 @@
+/*
+ * Style that order list table.
+ */
+
 table#orderlist thead th.id
 {
     width: 30px;
@@ -9,7 +13,7 @@ table#orderlist thead th.store
 }
 
 table#orderlist thead th.order-id,
-table#orderlist thead th.tracking-nr
+table#orderlist thead th.shipping-nr
 {
     width: 100px;
 }
@@ -34,4 +38,9 @@ table#orderlist thead th.state
 table#orderlist thead th.complete
 {
     width: 85px;
+}
+
+table#orderlist tbody td.complete span.label
+{
+    width: 200px ! important;
 }
