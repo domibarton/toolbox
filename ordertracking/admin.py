@@ -90,7 +90,7 @@ class OrderAdmin(admin.ModelAdmin):
     def set_complete_delivered(self, request, queryset):
         self.set_complete(request, queryset)
         self.set_delivered(request, queryset)
-    set_complete_delivered.short_description = 'Mark selected orders as complete and set states to "delivered"'
+    set_complete_delivered.short_description = 'Mark selected orders as complete and delivered today'
 
     def set_complete(self, request, queryset):
         queryset.update(complete=True)
@@ -103,11 +103,11 @@ class OrderAdmin(admin.ModelAdmin):
 
     def set_shipped(self, request, queryset):
         queryset.filter(shipping_date=None).update(shipping_date=date.today())
-    set_shipped.short_description = 'Set shipping date of selected orders to today'
+    set_shipped.short_description = 'Mark selected orders as shipped today'
 
     def set_delivered(self, request, queryset):
         queryset.filter(delivery_date=None).update(delivery_date=date.today())
-    set_delivered.short_description = 'Set delivery date of selected orders to today'
+    set_delivered.short_description = 'Mark selected orders as delivered today'
 
     def make_state_action(self, state):
         name   = 'set_state_{0}'.format(state.state)
