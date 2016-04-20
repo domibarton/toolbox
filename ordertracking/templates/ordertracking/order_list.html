@@ -26,12 +26,12 @@
             <th class="brief">Brief</th>
             <th class="order-date">Ordered</th>
             <th class="shipping-date">Shipped</th>
-            <th class="arrival-date">Received</th>
+            <th class="delivery-date">Delivered</th>
             <th class="duration">Dur.</th>
             <th class="state">State</th>
             <th class="complete">Complete</th>
             {% if user.is_authenticated %}
-            <th class="edit"></th>
+            <th class="actions"></th>
             {% endif %}
         </tr>
     </thead>
@@ -49,12 +49,17 @@
             <td class="brief">{{ order.brief }}</td>
             <td class="order-date">{{ order.order_date }}</td>
             <td class="shipping-date">{{ order.shipping_date|default:'' }}</td>
-            <td class="arrival_date">{{ order.arrival_date|default:'' }}</td>
+            <td class="delivery_date">{{ order.delivery_date|default:'' }}</td>
             <td class="duration">{{ order.get_duration_days }}</td>
             <td class="state">{% include 'ordertracking/snippets/order_state.html' %}</td>
             <td class="complete">{% include 'ordertracking/snippets/order_complete.html' %}</td>
             {% if user.is_authenticated %}
-            <td class="edit"><a href="{{ order.get_admin_url }}" target="_blank" class="btn btn-xs btn-default"><i class="fa fa-edit"></i> edit</a></td>
+            <td class="actions">
+                <a href="{% url 'admin:ordertracking_order_change' order.id %}" title="edit" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i></a>
+                {% if not order.complete %}
+                <a href="{% url 'ordertracking:complete' order.id %}" title="complete" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
+                {% endif %}
+            </td>
             {% endif %}
         </tr>
     {% endfor %}

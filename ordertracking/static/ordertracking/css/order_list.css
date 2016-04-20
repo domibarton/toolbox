@@ -40,9 +40,9 @@ table#orderlist thead th.complete
     width: 85px;
 }
 
-table#orderlist thead th.edit
+table#orderlist thead th.actions
 {
-    width: 50px;
+    width: 55px;
 }
 
 table#orderlist tbody td.complete span.label

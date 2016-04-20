@@ -6,7 +6,10 @@
 {% block content %}
 {% if user.is_authenticated %}
 <div class="pull-right">
-    <a href="{{ order.get_admin_url }}" target="_blank" class="btn btn-default"><i class="fa fa-edit"></i> edit</a>
+    <a href="{% url 'admin:ordertracking_order_change' order.id %}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> edit</a>
+    {% if not order.complete %}
+    <a href="{% url 'ordertracking:complete' order.id %}" class="btn btn-sm btn-success"><i class="fa fa-check"></i> complete</a>
+    {% endif %}
 </div>
 {% endif %}
 
@@ -45,7 +48,7 @@
             <dd>{% include 'ordertracking/snippets/order_complete.html' %}</dd>
             {% if order.shipping_nr %}
                 <dt>Shipping#</dt>
-                <dd><a class="{{ order.get_shipping_url }}">{{ order.shipping_nr }}</a></dd>
+                <dd><a href="{{ order.get_shipping_url }}" target="_blank">{{ order.shipping_nr }}</a></dd>
             {% endif %}
         </dl>
     </div>
@@ -57,7 +60,7 @@
             <dt>Shipping date</dt>
             <dd>{{ order.shipping_date|default:'' }}</dd>
             <dt>Arrival date</dt>
-            <dd>{{ order.arrival_date|default:'' }}</dd>
+            <dd>{{ order.delivery_date|default:'' }}</dd>
         </dl>
     </div>
 </div>

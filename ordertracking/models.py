@@ -43,7 +43,7 @@ class Order(models.Model):
     notes         = models.TextField(null=True, blank=True)
     order_date    = models.DateField(db_index=True, default=date.today)
     shipping_date = models.DateField(db_index=True, null=True, blank=True)
-    arrival_date  = models.DateField(db_index=True, null=True, blank=True)
+    delivery_date = models.DateField(db_index=True, null=True, blank=True)
     complete      = models.BooleanField(db_index=True, default=False)
 
     def __unicode__(self):
@@ -63,8 +63,8 @@ class Order(models.Model):
         return self.store.order_url.format(self.order_id)
 
     def get_duration_days(self):
-        if self.arrival_date:
-            return (self.arrival_date - self.order_date).days
+        if self.delivery_date:
+            return (self.delivery_date - self.order_date).days
         else:
             return (date.today() - self.order_date).days
 
