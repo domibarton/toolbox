@@ -20,7 +20,7 @@ table#orderlist thead th.shipping-nr
 
 table#orderlist thead th.order-date,
 table#orderlist thead th.shipping-date,
-table#orderlist thead th.arrival-date
+table#orderlist thead th.delivery-date
 {
     width: 85px;
 }
