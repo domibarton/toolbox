@@ -1,0 +1,121 @@
+#!/bin/bash
+set -e
+
+#
+# Display settings on standard out.
+#
+
+USER="toolbox"
+
+echo "POSIX settings"
+echo "=============="
+echo
+echo "  User: ${USER}"
+echo "  UID:  ${TOOLBOX_UID:=666}"
+echo "  GID:  ${TOOLBOX_GID:=666}"
+echo
+echo "Toolbox settings"
+echo "================"
+echo
+echo "  Mode: ${MODE:=django}"
+echo
+echo "Database settings"
+echo "================="
+echo
+echo "  Migrate: ${MIGRATE:=yes}"
+echo
+echo "Static files settings"
+echo "====================="
+echo
+echo "  Cleanup:  ${CLEANUP_STATIC_FILES:=yes}"
+echo "  Collect:  ${COLLECT_STATIC_FILES:=yes}"
+echo "  Compress: ${COMPRESS_STATIC_FILES:=yes}"
+echo
+
+#
+# Change UID / GID of CouchPotato user.
+#
+
+echo '===> Updating UID / GID...'
+[[ $(id -u ${USER}) == ${TOOLBOX_UID} ]] || usermod  -o -u ${TOOLBOX_UID} ${USER}
+[[ $(id -g ${USER}) == ${TOOLBOX_GID} ]] || groupmod -o -g ${TOOLBOX_GID} ${USER}
+echo 'DONE!'
+
+#
+# Setting permissions.
+#
+
+echo '===> Setting permissions...'
+chown ${USER}: .
+echo 'DONE!'
+
+#
+# Run database migrations.
+#
+
+if [[ "${MIGRATE^^}" == "YES" ]]
+then
+    echo '===> Running database migrations...'
+    sudo -u toolbox python manage.py migrate --noinput
+    echo 'DONE!'
+fi
+
+#
+# Prepare static files.
+#
+
+echo '===> Preparing static files directory...'
+mkdir -p static
+chown toolbox: static
+echo 'DONE!'
+
+if [[ "${CLEANUP_STATIC_FILES^^}" == "YES" ]]
+then
+    echo '===> Cleanup static files...'
+    rm -rf static/*
+    echo 'DONE!'
+fi
+
+if [[ "${COLLECT_STATIC_FILES^^}" == "YES" ]]
+then
+    echo '===> Collecting static files...'
+    sudo -u toolbox python manage.py collectstatic --noinput
+    echo 'DONE!'
+fi
+
+if [[ "${COMPRESS_STATIC_FILES^^}" == "YES" ]]
+then
+    echo '===> Compressing static files...'
+    sudo -u toolbox python manage.py compress
+    echo 'DONE!'
+fi
+
+#
+# Start process based on mode.
+#
+
+case "${MODE^^}" in
+
+    'DJANGO')
+        echo '===> Starting Django-internal development web server...'
+        exec sudo -u toolbox python manage.py runserver 0.0.0.0:8080
+        ;;
+
+    'GUNICORN')
+        echo '===> Starting Gunicorn web server...'
+        exec gunicorn toolbox.wsgi:application \
+            -n toolbox \
+            -u toolbox \
+            -g toolbox \
+            -b 0.0.0.0:8080
+        ;;
+
+    *)
+        echo 'ERROR: Invalid MODE environment variable defined!' >&2
+        echo '       Available modes are:' >&2
+        echo >&2
+        echo '          DJANGO:     Django development web server' >&2
+        echo '          GUNICORN:   Gunicorn web server' >&2
+        exit 255
+        ;;
+esac
