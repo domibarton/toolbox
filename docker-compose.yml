@@ -1,0 +1,21 @@
+---
+django:
+    build: .
+    environment:
+        MODE: 'gunicorn'
+    volumes:
+        - './data/static:/toolbox/static'
+        - './data/db.sqlite3:/toolbox/db.sqlite3'
+        - './data/settings_custom.py:/toolbox/toolbox/settings_custom.py'
+    restart: 'always'
+
+web:
+    image: 'nginx:1.9.9'
+    volumes:
+        - './docker/nginx.conf:/etc/nginx/nginx.conf'
+        - './data/static:/static'
+    ports:
+        - '81:80'
+    links:
+        - 'django'
+    restart: 'always'

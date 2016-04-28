@@ -1,3 +1,5 @@
 *.pyc
-db.sqlite3
-settings_custom.py
+/toolbox/db.sqlite3
+/toolbox/static
+/toolbox/toolbox/settings_custom.py
+/data
