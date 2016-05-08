@@ -75,5 +75,9 @@ class Order(models.Model):
         )
 
         unique_together = (
-            ('store', 'order_id'),
+            (
+                'store',
+                'order_id',
+                'order_date'
+            ),
         )
