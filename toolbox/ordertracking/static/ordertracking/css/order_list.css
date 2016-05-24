@@ -27,7 +27,7 @@ table#orderlist thead th.delivery-date
 
 table#orderlist thead th.duration
 {
-    width: 30px;
+    width: 50px;
 }
 
 table#orderlist thead th.state

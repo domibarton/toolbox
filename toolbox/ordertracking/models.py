@@ -63,10 +63,21 @@ class Order(models.Model):
         return self.store.order_url.format(self.order_id)
 
     def get_duration_days(self):
-        if self.delivery_date:
-            return (self.delivery_date - self.order_date).days
+        today = date.today()
+
+        if self.shipping_date and self.delivery_date:
+            shipping = (self.delivery_date - self.shipping_date).days
+        elif self.shipping_date:
+            shipping = (today - self.shipping_date).days
         else:
-            return (date.today() - self.order_date).days
+            shipping = '-'
+
+        if self.delivery_date:
+            total = (self.delivery_date - self.order_date).days
+        else:
+            total = (today - self.order_date).days
+
+        return '{}/{}'.format(total, shipping)
 
     class Meta:
         ordering = (
