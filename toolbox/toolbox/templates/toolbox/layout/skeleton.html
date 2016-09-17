@@ -32,13 +32,13 @@
     <body class="page-container-bg-solid page-md">
         {% block body %}{% endblock %}
 
-        {# WARNING: Do not compress bootstrap.js because django compressor doesn't like bootstrap! #}
+        {# WARNING: Do not compress bootstrap.js and app.js! #}
         <script src="{% static 'toolbox/plugins/jquery/jquery.min.js' %}"></script>
         <script src="{% static 'toolbox/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'toolbox/layout/js/app.min.js' %}"></script>
         {% compress js %}
         <script src="{% static 'toolbox/plugins/dataTables/js/jquery.dataTables.js' %}"></script>
         <script src="{% static 'toolbox/plugins/dataTables/js/dataTables.bootstrap.js' %}"></script>
-        <script src="{% static 'toolbox/layout/js/app.js' %}"></script>
         <script src="{% static 'toolbox/layout/js/layout.js' %}"></script>
         <script src="{% static 'toolbox/layout/js/custom.js' %}"></script>
         {% endcompress %}
