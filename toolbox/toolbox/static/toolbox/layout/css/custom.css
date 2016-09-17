@@ -30,21 +30,25 @@ h2
     text-decoration: none;
 }
 
-.page-header .page-header-menu .hor-menu .navbar-nav > li:hover > a,
-.page-header .page-header-menu .hor-menu .navbar-nav > li:hover > a > i
+@media (max-width: 991px)
 {
-    color: #1BBC9B ! important;
-}
 
-.page-header .page-header-menu .hor-menu .navbar-nav > li.open > a,
-.page-header .page-header-menu .hor-menu .navbar-nav > li.open > a:hover,
-.page-header .page-header-menu .hor-menu .navbar-nav > li.active > a,
-.page-header .page-header-menu .hor-menu .navbar-nav > li.active > a:hover,
-.page-header .page-header-menu .hor-menu .navbar-nav > li.current > a,
-.page-header .page-header-menu .hor-menu .navbar-nav > li.current > a:hover
-{
-    background-color: #1BBC9B ! important;
-    border-color: #1BBC9B;
+    .page-header .page-header-menu .hor-menu .navbar-nav > li:hover > a,
+    .page-header .page-header-menu .hor-menu .navbar-nav > li:hover > a > i
+    {
+        color: #1BBC9B ! important;
+    }
+
+    .page-header .page-header-menu .hor-menu .navbar-nav > li.open > a,
+    .page-header .page-header-menu .hor-menu .navbar-nav > li.open > a:hover,
+    .page-header .page-header-menu .hor-menu .navbar-nav > li.active > a,
+    .page-header .page-header-menu .hor-menu .navbar-nav > li.active > a:hover,
+    .page-header .page-header-menu .hor-menu .navbar-nav > li.current > a,
+    .page-header .page-header-menu .hor-menu .navbar-nav > li.current > a:hover
+    {
+        background-color: #1BBC9B ! important;
+        border-color: #1BBC9B;
+    }
 }
 
 /*
