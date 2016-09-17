@@ -1,17 +1,23 @@
-{% extends 'toolbox/skeleton.html' %}
+{% extends 'toolbox/layout/skeleton.html' %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 
 {% block title %}Login{% endblock %}
 
-{% block body %}
-    <div class="container" style="margin-top: 50px;">
-        <div class="row">
-
-            <div class="col-md-offset-4 col-md-4">
-                {% crispy form %}
-            </div>
-
-        </div>
-    </div>
+{% block css %}
+    <link href="{% static 'toolbox/css/login.css' %}" rel="stylesheet" type="text/css">
 {% endblock %}
+
+{% block body %}
+<div class="content">
+    <!-- BEGIN LOGIN FORM -->
+        <h3 class="form-title font-green">Sign In</h3>
+        <div class="alert alert-danger display-hide">
+            <button class="close" data-close="alert"></button>
+            <span> Enter any username and password. </span>
+        </div>
+        {% crispy form %}
+</div>
+{% endblock %}
+
+
