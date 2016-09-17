@@ -11,19 +11,6 @@ RUN \
     useradd -u 666 -g 666 -d /toolbox -c "Toolbox User" toolbox
 
 #
-# Install start script.
-#
-
-COPY docker/toolbox.init /toolbox.init
-RUN chmod 755 /toolbox.init
-
-#
-# Install Toolbox.
-#
-
-COPY toolbox /toolbox
-
-#
 # Install required packages.
 #
 
@@ -43,6 +30,19 @@ RUN \
 
 COPY docker/sudoers /etc/sudoers
 RUN chmod 440 /etc/sudoers
+
+#
+# Install start script.
+#
+
+COPY docker/toolbox.init /toolbox.init
+RUN chmod 755 /toolbox.init
+
+#
+# Install Toolbox.
+#
+
+COPY toolbox /toolbox
 
 #
 # Set container settings.
