@@ -11,6 +11,34 @@ from .models import Order, Store, State
 class OrderListView(ListView):
     model = Order
 
+    def get_context_data(self):
+        context           = super(OrderListView, self).get_context_data()
+        context['states'] = State.objects.all()
+        return context
+
+    def post(self, request):
+        update_state = self.request.POST.get('update-state')
+        update_date  = self.request.POST.get('update-date')
+        order_ids    = self.request.POST.getlist('id[]')
+
+        orders = Order.objects.filter(pk__in=order_ids)
+
+        if update_state:
+            state = State.objects.get(pk=int(update_state))
+            orders.update(state=state)
+
+        if update_date:
+            if update_date == 'shipped':
+                orders.filter(shipping_date=None).update(shipping_date=date.today())
+
+            if update_date in ('delivered', 'complete'):
+                orders.filter(delivery_date=None).update(delivery_date=date.today())
+
+            if update_date == 'complete':
+                orders.update(complete=True)
+
+        return redirect('ordertracking:list')
+
 
 class OrderDetailView(DetailView):
     model = Order

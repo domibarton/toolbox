@@ -1,68 +1,112 @@
-{% extends 'toolbox/base.html' %}
+{% extends 'toolbox/layout/base.html' %}
 {% load staticfiles %}
 
 {% block title %}List - Order Tracking{% endblock %}
 
-{% block head %}
+{% block css %}
 <link href="{% static 'ordertracking/css/order_list.css' %}" rel="stylesheet">
 {% endblock %}
 
-{% block content %}
-{% if user.is_authenticated %}
-<div class="pull-right">
-    <a href="{% url 'admin:ordertracking_order_add' %}" target="_blank" class="btn btn-default"><i class="fa fa-plus"></i> add</a>
+{% block js %}
+<script src="{% static 'ordertracking/js/order_list.js' %}"></script>
+{% endblock %}
+
+{% block page_title %}Order Tracking <small>List of orders</small>{% endblock %}
+
+{% block page_content %}
+<form method="POST">
+    {% csrf_token %}
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+            </div>
+            <div class="actions">
+                <div>
+                    <span class="font-grey-salt">Update order state of selected orders to </span>
+                    {% for state in states %}
+                        <button role="submit" class="btn btn-xs btn-outline btn-default" name="update-state" value="{{ state.id }}">{{ state }}</button>
+                    {% endfor %}
+                </div>
+                <div>
+                    <span class="font-grey-salt">Mark selected orders as </span>
+                    <button role="button" class="btn btn-xs btn-outline yellow-casablanca" name="update-date" value="shipped">shipped</button>
+                    <button role="button" class="btn btn-xs btn-outline yellow-casablanca" name="update-date" value="delivered">delivered</button>
+                    <button role="button" class="btn btn-xs btn-outline green-meadow" name="update-date" value="complete">delivered & complete</button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="portlet-body">
+                <table id="orderlist" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="select"></th>
+                            <th class="id">ID</th>
+                            <th class="order-id">Order ID</th>
+                            <th class="brief">Brief</th>
+                            <th class="ordered"><i class="fa fa-shopping-cart"></i></th>
+                            <th class="shipped"><i class="fa fa-truck"></i></th>
+                            <th class="shipping-nr"><i class="fa fa-crosshairs"></i></th>
+                            <th class="delivered"><i class="fa fa-map-marker"></i></th>
+                            <th class="state">State</th>
+                            <th class="complete">Complete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in order_list %}
+                        <tr>
+                            <td class="select">
+                                <input type="checkbox" name="id[]" value="{{ order.id }}">
+                            </td>
+                            <td class="id">
+                                <a href="{{ order.get_absolute_url }}">{{ order.id }}</a>
+                            </td>
+                            <td class="order-id">
+                                <a href="{{ order.get_order_url }}" target="_blank">{{ order.order_id }}</a>
+                            </td>
+                            <td class="brief">
+                                {{ order.brief }}
+                            </td>
+                            <td class="ordered">
+                                <i class="fa fa-shopping-cart"></i>
+                                <small>{{ order.order_days }}</small>
+                            </td>
+                            <td class="shipped {% if not order.shipping_date %}font-grey{% endif %}">
+                                <i class="fa fa-truck"></i>
+                                <small>{{ order.shipping_days }}</small>
+                            </td>
+                            <td class="shipping-nr">
+                                {% if order.shipping_nr %}
+                                    <a href="{{ order.get_shipping_url }}" target="_blank"><i class="fa fa-crosshairs"></i></a>
+                                {% else %}
+                                    <i class="fa fa-crosshairs font-grey"></i>
+                                {% endif %}
+                            </td>
+                            <td class="delivered {% if not order.delivery_date %}font-grey{% endif %}">
+                                <i class="fa fa-map-marker"></i>
+                                <small>{{ order.delivery_date|default:'' }}</small>
+                            </td>
+                            <td class="state">{% include 'ordertracking/snippets/order_state.html' %}</td>
+                            <td class="complete">{% include 'ordertracking/snippets/order_complete.html' %}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
-{% endif %}
-
-<h2>Order Tracking - List</h2>
-
-<table id="orderlist" class="table table-hover">
-    <thead>
-        <tr>
-            <th class="id">ID</th>
-            <th class="store">Store</th>
-            <th class="order-id">Order ID</th>
-            <th class="shipping-nr">Shipping #</th>
-            <th class="brief">Brief</th>
-            <th class="order-date">Ordered</th>
-            <th class="shipping-date">Shipped</th>
-            <th class="delivery-date">Delivered</th>
-            <th class="duration">Dur.</th>
-            <th class="state">State</th>
-            <th class="complete">Complete</th>
-            {% if user.is_authenticated %}
-            <th class="actions"></th>
-            {% endif %}
-        </tr>
-    </thead>
-    <tbody>
-    {% for order in order_list %}
-        <tr>
-            <td class="id"><a href="{{ order.get_absolute_url }}">{{ order.id }}</a></td>
-            <td class="store">{{ order.store }}</td>
-            <td class="order-id"><a href="{{ order.get_order_url }}" target="_blank">{{ order.order_id }}</a></td>
-            {% if order.shipping_nr %}
-                <td class="shipping-nr"><a href="{{ order.get_shipping_url }}" target="_blank">{{ order.shipping_nr }}</a></td>
-            {% else %}
-                <td class="shipping-nr"></td>
-            {% endif %}
-            <td class="brief">{{ order.brief }}</td>
-            <td class="order-date">{{ order.order_date }}</td>
-            <td class="shipping-date">{{ order.shipping_date|default:'' }}</td>
-            <td class="delivery_date">{{ order.delivery_date|default:'' }}</td>
-            <td class="duration">{{ order.get_duration_days }}</td>
-            <td class="state">{% include 'ordertracking/snippets/order_state.html' %}</td>
-            <td class="complete">{% include 'ordertracking/snippets/order_complete.html' %}</td>
-            {% if user.is_authenticated %}
-            <td class="actions">
-                <a href="{% url 'admin:ordertracking_order_change' order.id %}" title="edit" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i></a>
-                {% if not order.complete %}
-                <a href="{% url 'ordertracking:complete' order.id %}" title="complete" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
-                {% endif %}
-            </td>
-            {% endif %}
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
 {% endblock %}

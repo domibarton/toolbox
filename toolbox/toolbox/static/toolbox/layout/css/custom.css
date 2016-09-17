@@ -1,0 +1,95 @@
+/*
+ * Adjust h2 headings a bit.
+ */
+
+h2
+{
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.btn:not(.btn-sm):not(.btn-lg)
+{
+    margin-bottom: 5px;
+}
+
+/*
+ * Set correct colors for page header.
+ */
+
+.page-header .page-header-top .page-logo a,
+.page-header .page-header-top .top-menu .navbar-nav > li.dropdown > .dropdown-toggle
+{
+    color: #C1CCD1;
+}
+
+
+.page-header .page-header-top .page-logo a:active,
+.page-header .page-header-top .page-logo a:focus,
+.page-header .page-header-top .page-logo a:hover,
+.page-header .page-header-top .top-menu .navbar-nav > li.dropdown > .dropdown-toggle:active,
+.page-header .page-header-top .top-menu .navbar-nav > li.dropdown > .dropdown-toggle:focus,
+.page-header .page-header-top .top-menu .navbar-nav > li.dropdown > .dropdown-toggle:hover
+{
+    color: #a4b4bb;
+    text-decoration: none;
+}
+
+/*
+ * Style page logo.
+ */
+
+.page-header .page-header-top .page-logo
+{
+    font-size: 2em;
+    padding-top: 0.5em;
+}
+
+/*
+ * Make all tables 100% width.
+ */
+
+table
+{
+    width: 100%;
+}
+
+/*
+ * CSS3 blink animation.
+ */
+
+.blink
+{
+    animation-name                   : blink;
+    animation-duration               : 2s;
+    animation-timing-function        : linear;
+    animation-iteration-count        : infinite;
+
+    -webkit-animation-name           : blink;
+    -webkit-animation-duration       : 2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    -moz-animation-name              : blink;
+    -moz-animation-duration          : 2s;
+    -moz-animation-timing-function   : linear;
+    -moz-animation-iteration-count   : infinite;
+}
+
+@-moz-keyframes blink {
+    0%  { opacity: 1; }
+    25% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+@-webkit-keyframes blink {
+    0%  { opacity: 1; }
+    25% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+@keyframes blink {
+    0%  { opacity: 1; }
+    25% { opacity: 0; }
+    50% { opacity: 1; }
+}

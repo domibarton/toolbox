@@ -9,7 +9,7 @@ urlpatterns = [
         name='list'
     ),
     url(
-        regex=r'^(?P<pk>\d+)/$',
+        regex=r'^(?P<pk>\d+)/details/$',
         view=OrderDetailView.as_view(),
         name='detail'
     ),

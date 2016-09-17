@@ -1,0 +1,12 @@
+<ul class="nav navbar-nav">
+    <li {% if request.resolver_match.view_name == 'home' %}class="active"{% endif %}>
+        <a href="{% url 'home' %}" class="nav-link">
+            <i class="icon-home"></i> Home
+        </a>
+    </li>
+    <li {% if request.resolver_match.namespace == 'ordertracking' %}class="active"{% endif %}>
+        <a href="{% url 'ordertracking:list' %}" class="nav-link">
+            <i class="icon-basket"></i> Order Tracking
+        </a>
+    </li>
+</ul>

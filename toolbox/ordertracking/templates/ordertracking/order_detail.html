@@ -1,68 +1,57 @@
-{% extends 'toolbox/base.html' %}
 {% load markdownify %}
 
-{% block title %}Order {{ order }} - Order Tracking{% endblock %}
+<a href="{{ order.get_admin_url }}" class="btn dark pull-right">edit order</a>
 
-{% block content %}
-{% if user.is_authenticated %}
-<div class="pull-right">
-    <a href="{% url 'admin:ordertracking_order_change' order.id %}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> edit</a>
-    {% if not order.complete %}
-    <a href="{% url 'ordertracking:complete' order.id %}" class="btn btn-sm btn-success"><i class="fa fa-check"></i> complete</a>
-    {% endif %}
+<h2><i class="icon-info"></i> Informations</h2>
+<div class="container-fluid">
+    <div class="row text-center">
+        <div class="col-md-3">
+            <i class="fa fa-2x fa-shopping-basket"></i>
+            <p><a href="{{ order.get_order_url }}" target="_blank">{{ order.store }} {{ order.order_id }}</a></p>
+        </div>
+        <div class="col-md-3{% if not order.shipping_nr %} font-grey{% endif %}">
+            <i class="fa fa-2x fa-crosshairs"></i>
+            {% if order.shipping_nr %}
+            <p><a href="{{ order.get_shipping_url }}" target="_blank">{{ order.shipping_nr }}</a></p>
+            {% else %}
+            <p><em>no shipping # provided</em></p>
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+            {% include 'ordertracking/snippets/order_state.html' %}
+        </div>
+        <div class="col-md-3">
+            {% include 'ordertracking/snippets/order_complete.html' %}
+        </div>
+    </div>
 </div>
+
+<h2><i class="icon-bubbles"></i> Description</h2>
+<p>{{ order.brief }}</p>
+{% if order.description %}
+    <p>{{ order.description|markdownify|safe }}</p>
 {% endif %}
 
-<h2>Order {{ order }}</h2>
+<h2><i class="icon-calendar"></i> Dates</h2>
 
-<div class="row">
-    <div class="col-md-4">
-        <h3>
-            <i class="fa fa-cube"></i>
-            Description
-        </h3>
-        <p>
-            {{ order.brief }}
-        </p>
-        {% if order.description %}
-            <p>{{ order.description|markdownify|safe }}</p>
-        {% endif %}
-
-        {% if order.notes %}
-            <h3>
-                <i class="fa fa-sticky-note-o"></i>
-                Notes
-            </h3>
-            <p>{{ order.notes|markdownify|safe }}</p>
-        {% endif %}
-    </div>
-    <div class="col-md-4">
-        <h3>
-            <i class="fa fa-binoculars"></i>
-            State
-        </h3>
-        <dl class="dl-horizontal">
-            <dt>Order state</dt>
-            <dd>{% include 'ordertracking/snippets/order_state.html' %}</dd>
-            <dt>Complete</dt>
-            <dd>{% include 'ordertracking/snippets/order_complete.html' %}</dd>
-            {% if order.shipping_nr %}
-                <dt>Shipping#</dt>
-                <dd><a href="{{ order.get_shipping_url }}" target="_blank">{{ order.shipping_nr }}</a></dd>
-            {% endif %}
-        </dl>
-    </div>
-    <div class="col-md-4">
-        <h3><i class="fa fa-calendar"></i> Dates</h3>
-        <dl class="dl-horizontal">
-            <dt>Order date</dt>
-            <dd>{{ order.order_date }}</dd>
-            <dt>Shipping date</dt>
-            <dd>{{ order.shipping_date|default:'' }}</dd>
-            <dt>Arrival date</dt>
-            <dd>{{ order.delivery_date|default:'' }}</dd>
-        </dl>
+<div class="container-fluid">
+    <div class="row text-center">
+        <div class="col-md-4">
+            <i class="fa fa-2x fa-shopping-cart"></i>
+            <p>{{ order.order_date }}</p>
+        </div>
+        <div class="col-md-4{% if not order.shipping_date %} font-grey{% endif %}">
+            <i class="fa fa-2x fa-truck"></i>
+            <p>{{ order.shipping_date|default:'' }}</p>
+        </div>
+        <div class="col-md-4{% if not order.delivery_date %} font-grey{% endif %}">
+            <i class="fa fa-2x fa-map-marker"></i>
+            <p>{{ order.delivery_date|default:'' }}</p>
+        </div>
     </div>
 </div>
 
-{% endblock %}
+{% if order.notes %}
+    <h2><i class="icon-note"></i> Notes</h2>
+    <p>{{ order.notes|markdownify|safe }}</p>
+{% endif %}

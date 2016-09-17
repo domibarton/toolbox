@@ -3,7 +3,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.views import login, logout, password_change, password_change_done
 from toolbox.settings import LOGIN_REDIRECT_URL
-from .views import IndexView
+from .views import HomeView
 from .forms import ToolboxAuthenticationForm, ToolboxPasswordChangeForm
 
 urlpatterns = [
@@ -46,8 +46,8 @@ urlpatterns = [
     ),
     url(
         regex=r'^$',
-        view=IndexView.as_view(),
-        name='index',
+        view=HomeView.as_view(),
+        name='home',
     ),
     url(
         regex=r'^ordertracking/',

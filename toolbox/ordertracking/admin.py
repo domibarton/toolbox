@@ -24,6 +24,7 @@ class StoreAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
 
     list_display = (
+        'id',
         'order_id',
         'store',
         'brief',

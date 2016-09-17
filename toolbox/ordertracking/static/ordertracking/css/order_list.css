@@ -7,27 +7,25 @@ table#orderlist thead th.id
     width: 30px;
 }
 
-table#orderlist thead th.store
-{
-    width: 75px;
-}
-
-table#orderlist thead th.order-id,
-table#orderlist thead th.shipping-nr
+table#orderlist thead th.order-id
 {
     width: 100px;
 }
 
-table#orderlist thead th.order-date,
-table#orderlist thead th.shipping-date,
-table#orderlist thead th.delivery-date
+table#orderlist thead th.shipping-nr
 {
-    width: 90px;
+    width: 20px;
 }
 
-table#orderlist thead th.duration
+table#orderlist thead th.ordered,
+table#orderlist thead th.shipped
 {
-    width: 50px;
+    width: 40px;
+}
+
+table#orderlist thead th.delivered
+{
+    width: 90px;
 }
 
 table#orderlist thead th.state
@@ -40,12 +38,18 @@ table#orderlist thead th.complete
     width: 85px;
 }
 
-table#orderlist thead th.actions
+/*
+ * Style the modal for the order details.
+ */
+
+#detail h2:nth-child(2)
 {
-    width: 55px;
+    margin-top: 0;
 }
 
-table#orderlist tbody td.complete span.label
+#detail span.label
 {
-    width: 200px ! important;
+    margin: 2px;
+    font-size: 20px;
+    line-height: 40px;
 }

@@ -1,9 +1,9 @@
 {% if order.complete or order.state.id == 1 %}
-    <span class="label label-default">
+    <span class="label bg-grey-salt">
         {{ order.state }}
     </span>
 {% else %}
-    <span class="label label-danger blink">
+    <span class="label bg-red-sunglo blink">
         {{ order.state }}
     </span>
 {% endif %}
