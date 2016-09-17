@@ -11,7 +11,13 @@
 <script src="{% static 'ordertracking/js/order_list.js' %}"></script>
 {% endblock %}
 
-{% block page_title %}Order Tracking <small>List of orders</small>{% endblock %}
+{% block page_title %}
+Order Tracking <small>List of orders</small>
+{% endblock %}
+
+{% block page_toolbar %}
+<a href="{% url 'admin:ordertracking_order_add' %}" target="_blank" class="btn green-meadow"><i class="fa fa-plus"></i> add new order</a>
+{% endblock %}
 
 {% block page_content %}
 <form method="POST">

@@ -8,11 +8,6 @@ h2
     margin-bottom: 20px;
 }
 
-.btn:not(.btn-sm):not(.btn-lg)
-{
-    margin-bottom: 5px;
-}
-
 /*
  * Set correct colors for page header.
  */
@@ -46,12 +41,30 @@ h2
 }
 
 /*
+ * Add some spacing on to of page toolbar.
+ */
+
+.page-head .page-toolbar
+{
+    padding-top: 10px;
+}
+
+/*
  * Make all tables 100% width.
  */
 
 table
 {
     width: 100%;
+}
+
+/*
+ * Add some spacing on bottom of buttons.
+ */
+
+.btn:not(.btn-sm):not(.btn-lg)
+{
+    margin-bottom: 5px;
 }
 
 /*
