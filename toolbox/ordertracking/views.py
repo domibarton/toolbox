@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import get_object_or_404, redirect
+from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse
-from django.views.generic import View
-from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView
 from datetime import date
 from .models import Order, Store, State
+from .forms import OrderCreateForm, OrderUpdateForm
 
 
 class OrderListView(ListView):
@@ -40,5 +42,17 @@ class OrderListView(ListView):
         return redirect('ordertracking:list')
 
 
-class OrderDetailView(DetailView):
+class OrderModalView(DetailView):
     model = Order
+
+
+class OrderCreateView(CreateView):
+    model       = Order
+    form_class  = OrderCreateForm
+    success_url = reverse_lazy('ordertracking:list')
+
+
+class OrderUpdateView(UpdateView):
+    model       = Order
+    form_class  = OrderUpdateForm
+    success_url = reverse_lazy('ordertracking:list')

@@ -56,15 +56,6 @@ class OrderAdmin(admin.ModelAdmin):
                 'store',
                 'order_id',
                 'shipping_nr',
-                'state',
-                'complete',
-            )
-        }),
-        ('Dates', {
-            'fields': (
-                'order_date',
-                'shipping_date',
-                'delivery_date',
             )
         }),
         ('Description', {
@@ -76,6 +67,19 @@ class OrderAdmin(admin.ModelAdmin):
         ('Notes', {
             'fields': (
                 'notes',
+            )
+        }),
+        ('Dates', {
+            'fields': (
+                'order_date',
+                'shipping_date',
+                'delivery_date',
+            )
+        }),
+        ('State', {
+            'fields': (
+                'state',
+                'complete',
             )
         }),
     )

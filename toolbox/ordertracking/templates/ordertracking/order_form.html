@@ -1,0 +1,16 @@
+{% extends 'toolbox/layout/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% if order %}Edit order #{{ order.id }}{% else %}Create new order{% endif %} - Order Tracking{% endblock %}
+
+{% block page_title %}
+Order Tracking <small>{% if order %}Edit order #{{ order.id }}{% else %}Create new order{% endif %}</small>
+{% endblock %}
+
+{% block page_content %}
+<div class="portlet light">
+    <div class="portlet-body">
+        {% crispy form %}
+    </div>
+</div>
+{% endblock %}

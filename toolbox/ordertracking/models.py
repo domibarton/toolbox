@@ -79,7 +79,7 @@ class Order(models.Model):
         return self.get_duration()[1]
 
     def get_absolute_url(self):
-        return reverse('ordertracking:detail', kwargs={'pk': self.id})
+        return reverse('ordertracking:update', kwargs={'pk': self.id})
 
     def get_admin_url(self):
         content_type = ContentType.objects.get_for_model(self.__class__)

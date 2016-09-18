@@ -10,9 +10,10 @@
 
         <meta content="width=device-width, initial-scale=1" name="viewport" />
 
-        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
         {% compress css %}
+        <link href="{% static 'toolbox/layout/css/fonts.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'toolbox/plugins/bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'toolbox/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'toolbox/plugins/dataTables/css/dataTables.bootstrap.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'toolbox/plugins/font-awesome/css/font-awesome.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'toolbox/plugins/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css">
@@ -37,6 +38,7 @@
         <script src="{% static 'toolbox/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'toolbox/layout/js/app.min.js' %}"></script>
         {% compress js %}
+        <script src="{% static 'toolbox/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
         <script src="{% static 'toolbox/plugins/dataTables/js/jquery.dataTables.js' %}"></script>
         <script src="{% static 'toolbox/plugins/dataTables/js/dataTables.bootstrap.js' %}"></script>
         <script src="{% static 'toolbox/layout/js/layout.js' %}"></script>

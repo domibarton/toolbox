@@ -25,4 +25,29 @@ $(document).ready(function()
         });
     });
 
+    /*
+     * Add datepicker to date input fields.
+     */
+
+    $('input.dateinput').datepicker({
+        autoclose: false,
+        format: 'dd.mm.yyyy',
+        language: 'en-GB',
+        // startView: 'decade',
+    });
+
+    /*
+     * Let's handle all generic HTML select dropdowns and convert them to nice
+     * looking select2 dropdowns. Unfortunately, we need to handle also the
+     * floating label thingy of the material design, so we need a bit of a hack
+     * there as well.
+     */
+
+    // Replace the "empty" option with an empty string (instead of -----).
+    $('select option').each(function(k,o)
+    {
+        if(o.value == '')
+            o.innerHTML = '';
+    });
+
 });
