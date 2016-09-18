@@ -33,7 +33,8 @@ $(document).ready(function()
         autoclose: false,
         format: 'dd.mm.yyyy',
         language: 'en-GB',
-        // startView: 'decade',
+        clearBtn: true,
+        todayBtn: 'linked',
     });
 
     /*
