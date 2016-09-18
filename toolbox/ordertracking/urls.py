@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url
-from .views import OrderListView, OrderDetailView, OrderCompleteView
+from .views import OrderListView, OrderDetailView
 
 urlpatterns = [
     url(
@@ -12,10 +12,5 @@ urlpatterns = [
         regex=r'^(?P<pk>\d+)/details/$',
         view=OrderDetailView.as_view(),
         name='detail'
-    ),
-    url(
-        regex=r'^(?P<pk>\d+)/complete/$',
-        view=OrderCompleteView.as_view(),
-        name='complete'
     ),
 ]

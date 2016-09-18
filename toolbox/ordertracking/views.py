@@ -42,20 +42,3 @@ class OrderListView(ListView):
 
 class OrderDetailView(DetailView):
     model = Order
-
-
-class OrderCompleteView(View):
-    model = Order
-
-    def get(self, request,  *args, **kwargs):
-        order = get_object_or_404(Order, complete=False, pk=self.kwargs['pk'])
-
-        order.complete = True
-        if not order.delivery_date:
-            order.delivery_date = date.today()
-        order.save()
-
-        if 'HTTP_REFERER' in request.META:
-            return redirect(request.META['HTTP_REFERER'])
-        else:
-            return redirect('ordertracking:list')
