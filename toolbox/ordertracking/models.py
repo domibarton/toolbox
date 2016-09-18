@@ -42,8 +42,8 @@ class Order(models.Model):
     description   = models.TextField(null=True, blank=True, default='')
     notes         = models.TextField(null=True, blank=True, default='')
     order_date    = models.DateField(db_index=True, default=date.today)
-    shipping_date = models.DateField(db_index=True, null=True, blank=True, default='')
-    delivery_date = models.DateField(db_index=True, null=True, blank=True, default='')
+    shipping_date = models.DateField(db_index=True, null=True, blank=True)
+    delivery_date = models.DateField(db_index=True, null=True, blank=True)
     complete      = models.BooleanField(db_index=True, default=False)
 
     def __unicode__(self):
