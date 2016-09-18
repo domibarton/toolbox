@@ -25,7 +25,7 @@ table#orderlist thead th.shipped
 
 table#orderlist thead th.delivered
 {
-    width: 120px;
+    width: 130px;
 }
 
 table#orderlist thead th.state
