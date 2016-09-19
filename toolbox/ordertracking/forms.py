@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Div
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, HTML, Div
 from django.forms import ModelForm
 from .models import Order
 
@@ -37,7 +37,7 @@ class OrderCreateForm(ModelForm):
                 css_class='row'
             ),
             ButtonHolder(
-                Submit('submit', 'create order', css_class='btn green-meadow')
+                HTML('<button role="submit" class="btn btn green-meadow"><i class="fa fa-check"></i> create order</button>'),
             )
         )
 
@@ -87,6 +87,6 @@ class OrderUpdateForm(ModelForm):
                 css_class='row'
             ),
             ButtonHolder(
-                Submit('submit', 'edit order', css_class='btn green-meadow')
+                HTML('<button role="submit" class="btn btn green-meadow"><i class="fa fa-check"></i> edit order</button>'),
             )
         )
