@@ -80,7 +80,10 @@ Order Tracking <small>List of orders</small>
                             </td>
                             <td class="shipping-nr">
                                 {% if order.shipping_nr %}
-                                    <a href="{{ order.get_shipping_url }}" target="_blank"><i class="fa fa-crosshairs"></i></a>
+                                    <a href="{{ order.get_shipping_url }}" target="_blank">
+                                        <i class="fa fa-crosshairs"></i>
+                                        <small>{{ order.shipping_nr }}</small>
+                                    </a>
                                 {% else %}
                                     <i class="fa fa-crosshairs font-grey"></i>
                                 {% endif %}
