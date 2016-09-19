@@ -1,6 +1,6 @@
 {% load markdownify %}
 
-<a href="{{ order.get_absolute_url }}" class="btn dark pull-right">edit order</a>
+<a href="{{ order.get_absolute_url }}" class="btn btn-sm btn-outline yellow-casablanca pull-right"><i class="fa fa-pencil"></i> edit order</a>
 
 <h2><i class="icon-info"></i> Informations</h2>
 <div class="container-fluid">
@@ -32,6 +32,11 @@
     <p>{{ order.description|markdownify|safe }}</p>
 {% endif %}
 
+{% if order.notes %}
+    <h2><i class="icon-note"></i> Notes</h2>
+    <p>{{ order.notes|markdownify|safe }}</p>
+{% endif %}
+
 <h2><i class="icon-calendar"></i> Dates</h2>
 
 <div class="container-fluid">
@@ -50,8 +55,3 @@
         </div>
     </div>
 </div>
-
-{% if order.notes %}
-    <h2><i class="icon-note"></i> Notes</h2>
-    <p>{{ order.notes|markdownify|safe }}</p>
-{% endif %}
