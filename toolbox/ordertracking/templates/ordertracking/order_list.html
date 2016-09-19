@@ -24,8 +24,6 @@ Order Tracking <small>List of orders</small>
     {% csrf_token %}
     <div class="portlet light">
         <div class="portlet-title">
-            <div class="caption">
-            </div>
             <div class="actions">
                 <div>
                     <span class="font-grey-salt">Update order state of selected orders to </span>
@@ -42,7 +40,7 @@ Order Tracking <small>List of orders</small>
             </div>
             <div class="clearfix"></div>
             <div class="portlet-body">
-                <table id="orderlist" class="table table-hover">
+                <table id="orderlist" class="table table-hover datatable">
                     <thead>
                         <tr>
                             <th class="select"></th>

@@ -1,10 +1,10 @@
 $(document).ready(function()
 {
     /*
-     * All the tables should be data tables.
+     * All the tables w/ a "datatable" class should be data tables.
      */
 
-    tables = $('table');
+    tables = $('table.datatable');
 
     tables.DataTable({
         'pageLength': 100,
