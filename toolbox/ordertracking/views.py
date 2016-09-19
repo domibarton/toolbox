@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect, get_list_or_404
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse
 from django.views.generic.list import ListView
@@ -30,14 +30,15 @@ class OrderListView(ListView):
             orders.update(state=state)
 
         if update_date:
-            if update_date == 'shipped':
-                orders.filter(shipping_date=None).update(shipping_date=date.today())
+            if update_date == 'complete':
+                orders.update(complete=True)
 
             if update_date in ('delivered', 'complete'):
                 orders.filter(delivery_date=None).update(delivery_date=date.today())
 
-            if update_date == 'complete':
-                orders.update(complete=True)
+            if update_date == 'shipped':
+                orders.filter(shipping_date=None).update(shipping_date=date.today())
+                return redirect('ordertracking:update-shipping-nr', pks=','.join(order_ids))
 
         return redirect('ordertracking:list')
 
@@ -56,3 +57,31 @@ class OrderUpdateView(UpdateView):
     model       = Order
     form_class  = OrderUpdateForm
     success_url = reverse_lazy('ordertracking:list')
+
+
+class OrderUpdateShippingNrView(ListView):
+    model                = Order
+    template_name_suffix = '_shipping_nr_list'
+
+    def get_queryset(self):
+        pks = self.kwargs['pks'].split(',')
+        qs  = self.model.objects.filter(pk__in=pks)
+        return qs
+
+    def post(self, request, pks):
+        order_ids    = [int(i) for i in self.request.POST.getlist('id[]')]
+        shipping_nrs = self.request.POST.getlist('shipping-nr[]')
+
+        mapping = {}
+        i       = 0
+        for order_id in order_ids:
+            mapping[order_id] = shipping_nrs[i]
+            i                 += 1
+
+        for order in self.get_queryset():
+            shipping_nr = mapping[order.id].strip()
+            if shipping_nr:
+                order.shipping_nr = shipping_nr
+                order.save()
+
+        return redirect('ordertracking:list')
