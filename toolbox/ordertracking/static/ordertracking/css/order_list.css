@@ -2,38 +2,45 @@
  * Style that order list table.
  */
 
-table#orderlist thead th.id
+table#order-list thead th.id,
+table#order-list-shipping-nr thead th.id
 {
     width: 30px;
 }
 
-table#orderlist thead th.order-id
+table#order-list thead th.order-id,
+table#order-list-shipping-nr thead th.order-id
 {
     width: 100px;
 }
 
-table#orderlist thead th.shipping-nr
+table#order-list thead th.shipping-nr
 {
     width: 20px;
 }
 
-table#orderlist thead th.ordered,
-table#orderlist thead th.shipped
+table#order-list thead th.ordered,
+table#order-list thead th.shipped
 {
     width: 40px;
 }
 
-table#orderlist thead th.delivered
+table#order-list-shipping-nr thead th.shipped
+{
+    min-width: 160px;
+}
+
+table#order-list thead th.delivered
 {
     width: 130px;
 }
 
-table#orderlist thead th.state
+table#order-list thead th.state
 {
     width: 65px;
 }
 
-table#orderlist thead th.complete
+table#order-list thead th.complete
 {
     width: 85px;
 }

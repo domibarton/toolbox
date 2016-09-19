@@ -1,6 +1,10 @@
 {% extends 'toolbox/layout/base.html' %}
 {% load staticfiles %}
 
+{% block css %}
+<link href="{% static 'ordertracking/css/order_list.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block title %}Update tracking numbers - Order Tracking{% endblock %}
 
 {% block page_title %}
@@ -14,12 +18,13 @@ Order Tracking <small>Update shipping numbers</small>
         <div class="portlet-title">
         </div>
         <div class="portlet-body">
-            <table id="orderlist" class="table table-hover">
+            <table id="order-list-shipping-nr" class="table table-hover">
                 <thead>
                     <tr>
                         <th class="id">ID</th>
                         <th class="order-id">Order ID</th>
                         <th class="brief">Brief</th>
+                        <th class="shipped">Shipped</th>
                         <th class="shipping-nr">Shipping Number</th>
                     </tr>
                 </thead>
@@ -35,10 +40,14 @@ Order Tracking <small>Update shipping numbers</small>
                         <td class="brief">
                             {{ order.brief }}
                         </td>
-                        <td>
+                        <td class="shipped">
+                            {{ order.shipping_date|default:'' }}
+                        </td>
+                        <td class="shipping-nr">
+                            <input type="hidden" name="id[]" value="{{ order.id }}">
                             <div class="form-group form-md-line-input">
-                                <input type="hidden" name="id[]" value="{{ order.id }}">
                                 <input type="text" class="form-control" name="shipping-nr[]" value="{{ order.shipping_nr|default:'' }}">
+                                <div class="form-control-focus"></div>
                             </div>
                         </td>
                     </tr>
