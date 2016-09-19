@@ -49,8 +49,8 @@ Order Tracking <small>List of orders</small>
                             <th class="brief">Brief</th>
                             <th class="ordered"><i class="fa fa-shopping-cart"></i></th>
                             <th class="shipped"><i class="fa fa-truck"></i></th>
-                            <th class="shipping-nr"><i class="fa fa-crosshairs"></i></th>
-                            <th class="delivered"><i class="fa fa-map-marker"></i></th>
+                            <th class="shipping-nr"><i class="fa fa-map-marker"></i></th>
+                            <th class="delivered"><i class="fa fa-flag"></i></th>
                             <th class="state">State</th>
                             <th class="complete">Complete</th>
                         </tr>
@@ -81,15 +81,15 @@ Order Tracking <small>List of orders</small>
                             <td class="shipping-nr">
                                 {% if order.shipping_nr %}
                                     <a href="{{ order.get_shipping_url }}" target="_blank">
-                                        <i class="fa fa-crosshairs"></i>
+                                        <i class="fa fa-map-marker"></i>
                                         <small>{{ order.shipping_nr }}</small>
                                     </a>
                                 {% else %}
-                                    <i class="fa fa-crosshairs font-grey"></i>
+                                    <i class="fa fa-map-marker font-grey"></i>
                                 {% endif %}
                             </td>
                             <td class="delivered {% if not order.delivery_date %}font-grey{% endif %}">
-                                <i class="fa fa-map-marker"></i>
+                                <i class="fa fa-flag"></i>
                                 <small>{{ order.delivery_date|default:'' }}</small>
                             </td>
                             <td class="state">{% include 'ordertracking/snippets/order_state.html' %}</td>
