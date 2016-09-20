@@ -53,4 +53,8 @@ urlpatterns = [
         regex=r'^ordertracking/',
         view=include('ordertracking.urls', namespace='ordertracking')
     ),
+    url(
+        regex=r'^rchobby/',
+        view=include('rchobby.urls', namespace='rchobby')
+    ),
 ]

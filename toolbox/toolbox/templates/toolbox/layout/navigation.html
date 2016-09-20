@@ -9,4 +9,9 @@
             <i class="icon-basket"></i> Order Tracking
         </a>
     </li>
+    <li {% if request.resolver_match.namespace == 'rchobby' %}class="active"{% endif %}>
+        <a href="{% url 'rchobby:index' %}" class="nav-link">
+            <i class="icon-game-controller"></i> RC Hobby
+        </a>
+    </li>
 </ul>

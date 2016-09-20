@@ -89,6 +89,16 @@ table
 }
 
 /*
+ * Make "error" alerts displayed like "danger" alerts.
+ */
+
+.alert-error {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+/*
  * CSS3 blink animation.
  */
 

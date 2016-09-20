@@ -1,0 +1,11 @@
+table tbody tr td input
+{
+    border-top  : none;
+    border-left : none;
+    border-right: none;
+}
+
+input[type=file]
+{
+    display: inline-block;
+}

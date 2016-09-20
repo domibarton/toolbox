@@ -1,0 +1,119 @@
+{% extends 'toolbox/layout/base.html' %}
+
+{% block title %}RC Hobby{% endblock %}
+
+{% block page_title %}
+RC Hobby <small>Hyperion Control & Data Suite memoryset generator</small>
+{% endblock %}
+
+{% block page_content %}
+<div class="portlet light">
+    <div class="portlet-body">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="chargerID" value="{{ chargerID }}">
+            <input type="hidden" name="generate" value="True">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Memory</th>
+                        <th colspan="3">Battery</th>
+                        <th colspan="2">Current mA</th>
+                        <th colspan="2">Pb Voltage mV</th>
+                        <th colspan="3">NiCd / NiMH</th>
+                        <th colspan="3">Safety</th>
+                        <th colspan="3">TCS</th>
+                        <th>TVS</th>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Cells</th>
+                        <th>Cap. mA</th>
+                        <th>Charge</th>
+                        <th>Discharge</th>
+                        <th>Floating</th>
+                        <th>Charging</th>
+                        <th>Delta Peak</th>
+                        <th>Peak Delay</th>
+                        <th>Trickle mA</th>
+                        <th>Cutoff V.</th>
+                        <th>Cutoff T.</th>
+                        <th>Timer</th>
+                        <th>Storage</th>
+                        <th>Capacity</th>
+                        <th>Action</th>
+                        <th>V Adjust</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for memory in memoryset %}
+                        <tr>
+                            <td>
+                                <input size="15" maxlength="15" name="MemoryName[]" value="{{ memory.MemoryName }}">
+                            </td>
+                            <td>
+                                <select name="batteryType[]">
+                                    {% for type in battery_types %}
+                                        <option value="{{ type }}" {% if memory.batteryType == type %}selected{% endif %}>{{ type }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <input size="1" name="batteryCells[]" value="{{ memory.batteryCells }}">
+                            </td>
+                            <td>
+                                <input size="5" name="batteryCapacity[]" value="{{ memory.batteryCapacity }}">
+                            </td>
+                            <td>
+                                <input size="5" name="ChargeCurrent[]" value="{{ memory.ChargeCurrent }}">
+                            </td>
+                            <td>
+                                <input size="5" name="DischargeCurrent[]" value="{{ memory.DischargeCurrent }}">
+                            </td>
+                            <td>
+                                <input size="5" name="PB_FloatingVolt[]" value="{{ memory.PB_FloatingVolt }}">
+                            </td>
+                            <td>
+                                <input size="5" name="PB_BatteryChargeVolt[]" value="{{ memory.PB_BatteryChargeVolt }}">
+                            </td>
+                            <td>
+                                <input size="5" name="ChargeDeltaPeak[]" value="{{ memory.ChargeDeltaPeak }}">
+                            </td>
+                            <td>
+                                <input size="5" name="PrePeakDelay[]" value="{{ memory.PrePeakDelay }}">
+                            </td>
+                            <td>
+                                <input size="5" name="TrickleCurrent[]" value="{{ memory.TrickleCurrent }}">
+                            </td>
+                            <td>
+                                <input size="5" name="DischargeCutoffVoltage[]" value="{{ memory.DischargeCutoffVoltage }}">
+                            </td>
+                            <td>
+                                <input size="2" name="CutOffTemperature[]" value="{{ memory.CutOffTemperature }}">
+                            </td>
+                            <td>
+                                <input size="3" name="ChargeSafetyTimer[]" value="{{ memory.ChargeSafetyTimer }}">
+                            </td>
+                            <td>
+                                <input size="3" name="TCS_StoragePercent[]" value="{{ memory.TCS_StoragePercent }}">
+                            </td>
+                            <td>
+                                <input size="3" name="TCS_Capacity[]" value="{{ memory.TCS_Capacity }}">
+                            </td>
+                            <td>
+                                <input size="1" name="TCS_EndAction[]" value="{{ memory.TCS_EndAction }}">
+                            </td>
+                            <td>
+                                <input size="5" name="TVS_AdjustVoltage[]" value="{{ memory.TVS_AdjustVoltage }}">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button role="submit" class="btn green-meadow"><i class="fa fa-check"></i> generate & download memoryset</button>
+            <a href="{% url 'rchobby:index' %}" class="btn red-sunglo"><i class="fa fa-times"></i> abort</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

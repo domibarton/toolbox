@@ -1,0 +1,98 @@
+{% extends 'toolbox/layout/base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+<link href="{% static 'rchobby/css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}RC Hobby{% endblock %}
+
+{% block page_title %}RC Hobby <small>Because multicopters rock</small>{% endblock %}
+
+{% block page_content %}
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">Conditioning LiPo batteries</div>
+            </div>
+            <div class="portlet-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Action</th>
+                            <th>C</th>
+                            <th colspan="2">Voltage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="2" class="text-center font-grey-salsa"><i class="fa fa-2x fa-repeat margin-top-10 margin-bottom-10"></i><br>2 cycles</td>
+                            <td class="font-green-meadow uppercase">Charge</td>
+                            <td>0.5C</td>
+                            <td>100%</td>
+                            <td>4.2V <small class="font-grey-salsa">(or 4.3V for newer LiPo's)</small></td>
+                        </tr>
+                        <tr>
+                            <td class="font-red-sunglo uppercase">Discharge</td>
+                            <td>0.5C</td>
+                            <td>0%</td>
+                            <td>3.7V</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="text-center font-grey-salsa"><i class="fa fa-2x fa-repeat margin-top-10 margin-bottom-10"></i><br>2 cycles</td>
+                            <td class="font-green-meadow uppercase">Charge</td>
+                            <td>1C</td>
+                            <td>100%</td>
+                            <td>4.2V <small class="font-grey-salsa">(or 4.3V for newer LiPo's)</small></td>
+                        </tr>
+                        <tr>
+                            <td class="font-red-sunglo uppercase">Discharge</td>
+                            <td>1C</td>
+                            <td>0%</td>
+                            <td>3.7V</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center font-grey-salsa">finally</td>
+                            <td class="font-green-meadow uppercase">Charge</td>
+                            <td>1C</td>
+                            <td>100% <small class="font-grey-salsa">(or 60% for storage)</small></td>
+                            <td>4.2V <small class="font-grey-salsa">(or 4.0V for storage)</small></td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">Hyperion EOS memoryset manager</div>
+            </div>
+            <div class="portlet-body text-center font-grey-salsa">
+                <form action="{% url 'rchobby:hyperion' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p>
+                        This section is designed for the Hyperino EOS charger and its software.
+                        Please have a look at the <a href="http://media.hyperion.hk/dn/pc/ecds-man/MainMenu.htm">official Hyperion EOS Control & Data Suite</a> page for more informations about the software for the Hyperion charger.
+                    </p>
+                    <p>
+                        You can easily modify your existing memoryset by uploading a backupped memoryset file (<code>*.eos</code>) of the Hyperion EOS Control & Data Suite here:
+                    </p>
+                    <div class="margin-top-40 margin-bottom-40">
+                        <input type="file" name="file">
+                    </div>
+                    <div class="margin-bottom-20">
+                        <button role="submit" class="btn green-meadow"><i class="fa fa-upload"></i> upload memoryset</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

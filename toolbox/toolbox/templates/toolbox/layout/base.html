@@ -60,6 +60,13 @@
                         <div class="container-fluid">
                             <div class="page-content-inner">
                                 <div class="mt-content-body">
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}">
+                                        {{ message }}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
                                     {% block page_content %}{% endblock %}
                                 </div>
                             </div>

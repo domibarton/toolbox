@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'compressor',
     'ordertracking',
+    'rchobby',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -76,7 +77,6 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'toolbox.middleware.LoginRequiredMiddleware'
 ]
-
 
 WSGI_APPLICATION = 'toolbox.wsgi.application'
 
