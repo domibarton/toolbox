@@ -14,11 +14,6 @@ table#order-list-shipping-nr thead th.order-id
     width: 100px;
 }
 
-table#order-list thead th.shipping-nr
-{
-    width: 130px;
-}
-
 table#order-list thead th.ordered,
 table#order-list thead th.shipped
 {
@@ -28,6 +23,11 @@ table#order-list thead th.shipped
 table#order-list-shipping-nr thead th.shipped
 {
     min-width: 160px;
+}
+
+table#order-list thead th.shipping-nr
+{
+    width: 160px;
 }
 
 table#order-list thead th.delivered
