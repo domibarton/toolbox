@@ -5,10 +5,11 @@
 
 {% block css %}
 <link href="{% static 'ordertracking/css/order_list.css' %}" rel="stylesheet">
+<link href="{% static 'ordertracking/css/order_detail.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block js %}
-<script src="{% static 'ordertracking/js/order_list.js' %}"></script>
+<script src="{% static 'ordertracking/js/order_detail.js' %}"></script>
 {% endblock %}
 
 {% block page_title %}
@@ -16,7 +17,8 @@ Order Tracking <small>List of orders</small>
 {% endblock %}
 
 {% block page_toolbar %}
-<a href="{% url 'ordertracking:create' %}" class="btn btn-outline green-meadow"><i class="fa fa-plus"></i> add new order</a>
+<a href="{% url 'ordertracking:update-shipping-status' %}" class="btn btn-outline grey-mint"><i class="fa fa-truck"></i> update shipping status</a>
+<a href="{% url 'ordertracking:create' %}" class="btn btn-outline grey-mint"><i class="fa fa-plus"></i> add new order</a>
 {% endblock %}
 
 {% block page_content %}
@@ -103,17 +105,5 @@ Order Tracking <small>List of orders</small>
     </div>
 </form>
 
-<div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body"></div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+{% include 'ordertracking/snippets/order_detail_modal.html' %}
 {% endblock %}

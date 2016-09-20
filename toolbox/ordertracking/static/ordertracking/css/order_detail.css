@@ -1,0 +1,15 @@
+/*
+ * Style the modal for the order details.
+ */
+
+#detail h2:nth-child(2)
+{
+    margin-top: 0;
+}
+
+#detail span.label
+{
+    font-size  : 16px;
+    line-height: 44px;
+    padding    : 6px 12px;
+}

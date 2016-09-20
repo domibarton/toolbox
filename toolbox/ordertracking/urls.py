@@ -28,4 +28,9 @@ urlpatterns = [
         view=OrderUpdateShippingNrView.as_view(),
         name='update-shipping-nr'
     ),
+    url(
+        regex=r'^update-shipping-status/$',
+        view=OrderUpdateShippingStatusView.as_view(),
+        name='update-shipping-status'
+    ),
 ]

@@ -2,6 +2,11 @@
  * Style that order list table.
  */
 
+table#order-list thead th.select
+{
+    width: 12px;
+}
+
 table#order-list thead th.id,
 table#order-list-shipping-nr thead th.id
 {
@@ -43,21 +48,4 @@ table#order-list thead th.state
 table#order-list thead th.complete
 {
     width: 85px;
-}
-
-/*
- * Style the modal for the order details.
- */
-
-#detail h2:nth-child(2)
-{
-    margin-top: 0;
-}
-
-#detail span.label
-{
-    margin: 2px;
-    font-size: 20px;
-    line-height: 40px;
-    padding: 6px 12px;
 }

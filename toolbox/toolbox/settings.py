@@ -211,6 +211,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 SHIPPING_URL = 'https://service.post.ch/EasyTrack/submitParcelData.do?formattedParcelCodes={}&from_directentry=True&directSearch=false&p_language=de&VTI-GROUP=1&lang=de&service=ttb'
 
+TRACK_TRACE_LANGUAGE = 'en'
+
 #
 # Load custom settings.
 #

@@ -8,6 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from datetime import date
 from .models import Order, Store, State
 from .forms import OrderCreateForm, OrderUpdateForm
+from .post import TrackAndTrace
 
 
 class OrderListView(ListView):
@@ -85,3 +86,28 @@ class OrderUpdateShippingNrView(ListView):
                 order.save()
 
         return redirect('ordertracking:list')
+
+
+class OrderUpdateShippingStatusView(ListView):
+    model = Order
+
+    def get_queryset(self):
+        '''
+        Returns only incomplete orders with a shipping number.
+        '''
+        qs = super(OrderUpdateShippingStatusView, self).get_queryset()
+        return qs.filter(complete=False).exclude(shipping_nr='')
+
+    def get(self, request):
+        '''
+
+        '''
+        orders = {o.shipping_nr: o for o in self.get_queryset()}
+
+        if orders:
+            for n, e in TrackAndTrace.get_shipping_events(orders.keys()).iteritems():
+                o = orders[n]
+                o.shipping_status = e
+                o.save()
+
+        return redirect(request.META.get('HTTP_REFERER') or 'home')

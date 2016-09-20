@@ -1,8 +1,23 @@
 {% extends 'toolbox/layout/base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+<link href="{% static 'ordertracking/css/order_list.css' %}" rel="stylesheet">
+<link href="{% static 'ordertracking/css/order_detail.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'ordertracking/js/order_detail.js' %}"></script>
+{% endblock %}
 
 {% block title %}Welcome{% endblock %}
 
 {% block page_title %}Home{% endblock %}
+
+{% block page_toolbar %}
+<a href="{% url 'ordertracking:update-shipping-status' %}" class="btn btn-outline grey-mint"><i class="fa fa-truck"></i> update shipping status</a>
+<a href="{% url 'ordertracking:create' %}" class="btn btn-outline grey-mint"><i class="fa fa-plus"></i> add new order</a>
+{% endblock %}
 
 {% block page_content %}
 <div class="portlet light">
@@ -19,6 +34,7 @@
                     <th class="ordered"><i class="fa fa-shopping-cart"></i></th>
                     <th class="shipped"><i class="fa fa-truck"></i></th>
                     <th class="shipping-nr"><i class="fa fa-map-marker"></i></th>
+                    <th class="shipping-status">Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,10 +67,15 @@
                             <i class="fa fa-map-marker font-grey"></i>
                         {% endif %}
                     </td>
+                    <td class="shipping-status">
+                        {{ order.shipping_status }}
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
+
+{% include 'ordertracking/snippets/order_detail_modal.html' %}
 {% endblock %}

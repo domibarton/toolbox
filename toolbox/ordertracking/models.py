@@ -34,17 +34,18 @@ class Store(models.Model):
 
 
 class Order(models.Model):
-    store         = models.ForeignKey(Store)
-    state         = models.ForeignKey(State, default=1)
-    order_id      = models.CharField(max_length=24, db_index=True, verbose_name='order ID')
-    shipping_nr   = models.CharField(max_length=32, null=True, blank=True, default='', verbose_name='shipping number')
-    brief         = models.CharField(max_length=255, db_index=True)
-    description   = models.TextField(null=True, blank=True, default='')
-    notes         = models.TextField(null=True, blank=True, default='')
-    order_date    = models.DateField(db_index=True, default=date.today)
-    shipping_date = models.DateField(db_index=True, null=True, blank=True)
-    delivery_date = models.DateField(db_index=True, null=True, blank=True)
-    complete      = models.BooleanField(db_index=True, default=False)
+    store           = models.ForeignKey(Store)
+    state           = models.ForeignKey(State, default=1)
+    order_id        = models.CharField(max_length=24, db_index=True, verbose_name='order ID')
+    shipping_nr     = models.CharField(max_length=32, null=True, blank=True, default='', verbose_name='shipping number')
+    shipping_status = models.CharField(max_length=255, null=True, blank=True, default='', verbose_name='last shipping status')
+    brief           = models.CharField(max_length=255, db_index=True)
+    description     = models.TextField(null=True, blank=True, default='')
+    notes           = models.TextField(null=True, blank=True, default='')
+    order_date      = models.DateField(db_index=True, default=date.today)
+    shipping_date   = models.DateField(db_index=True, null=True, blank=True)
+    delivery_date   = models.DateField(db_index=True, null=True, blank=True)
+    complete        = models.BooleanField(db_index=True, default=False)
 
     def __unicode__(self):
         return '{} {}'.format(self.store, self.order_id)
