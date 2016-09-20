@@ -48,7 +48,7 @@ class TrackAndTrace(object):
         for i in range(count):
             shipments.append((numbers[i], events[i]))
 
-        return OrderedDict(shipments)
+        return shipments
 
     @classmethod
     def get_shipping_events(cls, numbers):
@@ -63,8 +63,20 @@ class TrackAndTrace(object):
         # Numbers with only 3 characters will result to an error, so remove them.
         numbers = filter(lambda x: len(x) >= 4, numbers)
 
-        # Request HTML content.
-        html = cls.request(numbers)
+        # Split numbers into chunks, because only 20 numbers are allowed.
+        chunks = []
+        while numbers:
+            chunks.append(numbers[:20])
+            del numbers[:20]
 
-        # Parse HTML content and return infos.
-        return cls.parse(html)
+        # Now fetch all the events.
+        events = []
+        for numbers in chunks:
+
+            # Request HTML content.
+            html = cls.request(numbers)
+
+            # Parse HTML content and return infos.
+            events += cls.parse(html)
+
+        return OrderedDict(events)
