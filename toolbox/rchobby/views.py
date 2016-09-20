@@ -127,7 +127,7 @@ class HyperionView(TemplateView):
         l = len(data['batteryCapacity'])
 
         # Initialize <MEMORYSET…>.
-        memoryset = '<MEMORYSET chargerID="{}" channel="0" memoryCount="{}" creatorVersion="Toolbox" date="{}">\n'.format(
+        memoryset = '<MEMORYSET chargerID="{}" channel="0" memoryCount="{}" creatorVersion="Toolbox" date="{}">\r\n'.format(
             data['chargerID'],
             l,
             timezone.now().strftime('%d/%m/%Y %H:%M:%S')
@@ -161,7 +161,7 @@ class HyperionView(TemplateView):
             memory += 'CheckSum="{}" />'.format(checksum)
 
             # Add <MEMORY…> entry to <MEMORYSET…>.
-            memoryset += '{}\n'.format(memory)
+            memoryset += '{}\r\n'.format(memory)
 
         # Finalize <MEMORYSET…>.
         memoryset += '</MEMORYSET>'
