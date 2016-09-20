@@ -26,13 +26,13 @@ Order Tracking <small>List of orders</small>
         <div class="portlet-title">
             <div class="actions">
                 <div>
-                    <span class="font-grey-salt">Update order state of selected orders to </span>
+                    <span class="font-grey-salsa">Update order state of selected orders to </span>
                     {% for state in states %}
                         <button role="submit" class="btn btn-xs btn-outline btn-default" name="update-state" value="{{ state.id }}">{{ state }}</button>
                     {% endfor %}
                 </div>
                 <div>
-                    <span class="font-grey-salt">Mark selected orders as </span>
+                    <span class="font-grey-salsa">Mark selected orders as </span>
                     <button role="button" class="btn btn-xs btn-outline yellow-casablanca" name="update-date" value="shipped">shipped</button>
                     <button role="button" class="btn btn-xs btn-outline yellow-casablanca" name="update-date" value="delivered">delivered</button>
                     <button role="button" class="btn btn-xs btn-outline green-meadow" name="update-date" value="complete">delivered & complete</button>
