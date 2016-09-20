@@ -127,10 +127,12 @@ class HyperionView(TemplateView):
         l = len(data['batteryCapacity'])
 
         # Initialize <MEMORYSET…>.
-        memoryset = '<MEMORYSET chargerID="{}" channel="0" memoryCount="{}" creatorVersion="Toolbox" date="{}">\r\n'.format(
+        now       = timezone.now()
+        memoryset = '<MEMORYSET chargerID="{}" channel="0" memoryCount="{}" creatorVersion="{}" date="{}">\r\n'.format(
             data['chargerID'],
             l,
-            timezone.now().strftime('%d/%m/%Y %H:%M:%S')
+            now.strftime('%Y-%m-%d'),
+            now.strftime('%d/%m/%Y %H:%M:%S')
         )
 
         # Create <MEMORY…> entries.
