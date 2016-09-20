@@ -35,6 +35,15 @@ table#order-list thead th.shipping-nr
     width: 160px;
 }
 
+table#order-list tbody td.shipping-nr small
+{
+    display      : inline-block;
+    white-space  : nowrap;
+    width        : 140px;
+    overflow     : hidden;
+    text-overflow: ellipsis;
+}
+
 table#order-list thead th.delivered
 {
     width: 130px;

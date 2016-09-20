@@ -84,7 +84,13 @@ Order Tracking <small>List of orders</small>
                                 {% if order.shipping_nr %}
                                     <a href="{{ order.get_shipping_url }}" target="_blank">
                                         <i class="fa fa-map-marker"></i>
-                                        <small>{{ order.shipping_nr }}</small>
+                                        <small>
+                                            {% if order.shipping_status %}
+                                                {{ order.shipping_status }}
+                                            {% else %}
+                                                {{ order.shipping_nr }}
+                                            {% endif %}
+                                        </small>
                                     </a>
                                 {% else %}
                                     <i class="fa fa-map-marker font-grey"></i>
