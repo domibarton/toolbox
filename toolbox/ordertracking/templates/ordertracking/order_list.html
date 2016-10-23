@@ -78,7 +78,7 @@ Order Tracking <small>List of orders</small>
                             </td>
                             <td class="shipped {% if not order.shipping_date %}font-grey{% endif %}">
                                 <i class="fa fa-truck"></i>
-                                <small>{{ order.shipping_days }}</small>
+                                <small>{{ order.shipping_days|default:'' }}</small>
                             </td>
                             <td class="shipping-nr">
                                 {% if order.shipping_nr %}

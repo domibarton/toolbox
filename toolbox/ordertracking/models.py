@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.models import ContentType
 from datetime import date
 from toolbox.settings import SHIPPING_URL
+from .post import TrackAndTrace
 
 
 class State(models.Model):
@@ -60,12 +61,14 @@ class Order(models.Model):
             elif self.shipping_date:
                 shipping = (today - self.shipping_date).days
             else:
-                shipping = ''
+                shipping = 0
 
             if self.delivery_date:
                 total = (self.delivery_date - self.order_date).days
-            else:
+            elif not self.complete:
                 total = (today - self.order_date).days
+            else:
+                total = 0
 
             self._duration = total, shipping
 
@@ -91,6 +94,16 @@ class Order(models.Model):
 
     def get_order_url(self):
         return self.store.order_url.format(self.order_id)
+
+    def update_shipping_status(self):
+        if not self.shipping_nr:
+            return
+
+        results = TrackAndTrace.get_shipping_events(self.shipping_nr)
+
+        if self.shipping_nr in results:
+            self.shipping_status = results.get(self.shipping_nr)
+            self.save()
 
     class Meta:
         ordering = (
