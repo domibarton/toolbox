@@ -1,4 +1,5 @@
 *.pyc
+.venv/
 /toolbox/db.sqlite3
 /toolbox/static
 /toolbox/toolbox/settings_custom.py
