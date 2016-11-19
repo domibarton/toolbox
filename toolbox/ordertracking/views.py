@@ -21,7 +21,7 @@ class OrderListView(ListView):
 
     def post(self, request):
         update_state = self.request.POST.get('update-state')
-        update_date  = self.request.POST.get('update-date')
+        update_order = self.request.POST.get('update-order')
         order_ids    = self.request.POST.getlist('id[]')
 
         orders = Order.objects.filter(pk__in=order_ids)
@@ -30,14 +30,14 @@ class OrderListView(ListView):
             state = State.objects.get(pk=int(update_state))
             orders.update(state=state)
 
-        if update_date:
-            if update_date == 'complete':
+        if update_order:
+            if 'complete' in update_order:
                 orders.update(complete=True)
 
-            if update_date in ('delivered', 'complete'):
+            if 'delivered' in update_order:
                 orders.filter(delivery_date=None).update(delivery_date=date.today())
 
-            if update_date == 'shipped':
+            if 'shipped' in update_order:
                 orders.filter(shipping_date=None).update(shipping_date=date.today())
                 return redirect('ordertracking:update-shipping-nr', pks=','.join(order_ids))
 
