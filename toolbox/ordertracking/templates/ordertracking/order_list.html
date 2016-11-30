@@ -50,6 +50,7 @@ Order Tracking <small>List of orders</small>
                             <th class="id">ID</th>
                             <th class="order-id">Order ID</th>
                             <th class="brief">Brief</th>
+                            <th class="price">Price</th>
                             <th class="ordered"><i class="fa fa-shopping-cart"></i></th>
                             <th class="shipped"><i class="fa fa-truck"></i></th>
                             <th class="shipping-nr"><i class="fa fa-map-marker"></i></th>
@@ -72,6 +73,9 @@ Order Tracking <small>List of orders</small>
                             </td>
                             <td class="brief">
                                 {{ order.brief }}
+                            </td>
+                            <td class="price">
+                                {{ order.price }}
                             </td>
                             <td class="ordered">
                                 <i class="fa fa-shopping-cart"></i>

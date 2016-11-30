@@ -14,8 +14,10 @@ class OrderCreateForm(ModelForm):
         fields = (
             'store',
             'order_id',
+            'shipping_nr',
             'brief',
             'description',
+            'price',
             'order_date',
             'state',
         )
@@ -25,11 +27,16 @@ class OrderCreateForm(ModelForm):
         self.helper        = FormHelper()
         self.helper.layout = Layout(
             Div(
-                Div('store', css_class='col-md-6'),
-                Div('order_id', css_class='col-md-6'),
+                Div('store', css_class='col-md-4'),
+                Div('order_id', css_class='col-md-4'),
+                Div('shipping_nr', css_class='col-md-4'),
                 css_class='row'
             ),
-            'brief',
+            Div(
+                Div('brief', css_class='col-md-8'),
+                Div('price', css_class='col-md-4'),
+                css_class='row'
+            ),
             'description',
             Div(
                 Div('order_date', css_class='col-md-6'),
@@ -54,6 +61,7 @@ class OrderUpdateForm(ModelForm):
             'shipping_nr',
             'brief',
             'description',
+            'price',
             'notes',
             'order_date',
             'shipping_date',
@@ -72,7 +80,11 @@ class OrderUpdateForm(ModelForm):
                 Div('shipping_nr', css_class='col-md-4'),
                 css_class='row'
             ),
-            'brief',
+            Div(
+                Div('brief', css_class='col-md-8'),
+                Div('price', css_class='col-md-4'),
+                css_class='row'
+            ),
             'description',
             'notes',
             Div(

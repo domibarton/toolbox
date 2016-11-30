@@ -46,6 +46,7 @@ class Order(models.Model):
     order_date      = models.DateField(db_index=True, default=date.today)
     shipping_date   = models.DateField(db_index=True, null=True, blank=True)
     delivery_date   = models.DateField(db_index=True, null=True, blank=True)
+    price           = models.CharField(max_length=16, null=True, blank=True, default='', verbose_name='price')
     complete        = models.BooleanField(db_index=True, default=False)
 
     def __unicode__(self):

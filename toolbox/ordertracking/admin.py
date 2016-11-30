@@ -28,6 +28,7 @@ class OrderAdmin(admin.ModelAdmin):
         'order_id',
         'store',
         'brief',
+        'price',
         'order_date',
         'shipping_date',
         'delivery_date',
@@ -55,6 +56,7 @@ class OrderAdmin(admin.ModelAdmin):
             'fields': (
                 'store',
                 'order_id',
+                'price',
                 'shipping_nr',
             )
         }),
