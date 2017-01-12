@@ -19,6 +19,12 @@ table#order-list-shipping-nr thead th.order-id
     width: 100px;
 }
 
+table#order-list thead th.price,
+table#order-list-shipping-nr thead th.price
+{
+    width: 80px;
+}
+
 table#order-list thead th.ordered,
 table#order-list thead th.shipped
 {
