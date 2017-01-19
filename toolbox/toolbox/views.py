@@ -18,6 +18,6 @@ class HomeView(ListView):
         ts = timezone.now() - timedelta(days=10)
 
         qs = super(HomeView, self).get_queryset()
-        q1 = Q(complete=False, delivery_date=None, shipping_date__lte=ts)
-        q2 = Q(complete=False, shipping_status__in=SHIPPING_STATUS_ARRIVING_SOON)
-        return qs.filter(q1 | q2).order_by('shipping_date')
+        q1 = Q(complete=False, delivery_date=None, shipping_status="", shipping_date__lte=ts)
+        q2 = Q(complete=False, delivery_date=None, shipping_status__in=SHIPPING_STATUS_ARRIVING_SOON)
+        return qs.filter(q1).order_by('shipping_date')
