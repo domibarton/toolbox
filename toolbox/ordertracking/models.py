@@ -39,7 +39,7 @@ class Order(models.Model):
     state           = models.ForeignKey(State, default=1)
     order_id        = models.CharField(max_length=24, db_index=True, verbose_name='order ID')
     shipping_nr     = models.CharField(max_length=32, null=True, blank=True, default='', verbose_name='shipping number')
-    shipping_status = models.CharField(max_length=255, null=True, blank=True, default='', verbose_name='last shipping status')
+    shipping_status = models.CharField(max_length=255, null=True, blank=True, db_index=True, default='', verbose_name='last shipping status')
     brief           = models.CharField(max_length=255, db_index=True)
     description     = models.TextField(null=True, blank=True, default='')
     notes           = models.TextField(null=True, blank=True, default='')

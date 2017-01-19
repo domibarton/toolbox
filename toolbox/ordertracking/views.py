@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import redirect, get_list_or_404
+from django.shortcuts import redirect
 from django.core.urlresolvers import reverse_lazy
-from django.http import HttpResponse
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from datetime import date
-from .models import Order, Store, State
+from .models import Order, State
 from .forms import OrderCreateForm, OrderUpdateForm
 from .post import TrackAndTrace
+from toolbox.settings import SHIPPING_STATUS_DELIVERED
 
 
 class OrderListView(ListView):
@@ -108,6 +108,8 @@ class OrderUpdateShippingStatusView(ListView):
             for n, e in TrackAndTrace.get_shipping_events(orders.keys()).iteritems():
                 o = orders[n]
                 o.shipping_status = e
+                if e == SHIPPING_STATUS_DELIVERED and not o.delivery_date:
+                    o.delivery_date = date.today()
                 o.save()
 
         return redirect(request.META.get('HTTP_REFERER') or 'home')
