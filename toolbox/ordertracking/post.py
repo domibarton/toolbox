@@ -16,7 +16,7 @@ class TrackAndTrace(object):
         Sends the HTTP request to the post.ch Track & Trace site.
         '''
         # Build URL for Post.
-        url = 'https://www.post.ch/swisspost-tracking'
+        url = 'https://service.post.ch/EasyTrack/submitParcelData.do'
         url += '?formattedParcelCodes={}'.format(';'.join(numbers))
         url += '&p_language={}'.format(TRACK_TRACE_LANGUAGE)
 
