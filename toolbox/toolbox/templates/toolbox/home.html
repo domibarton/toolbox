@@ -22,10 +22,10 @@
 {% block page_content %}
 <div class="portlet light">
     <div class="portlet-title">
-        <div class="caption">Orders coming in soon</div>
+        <div class="caption">Orders arriving soon</div>
     </div>
     <div class="portlet-body margin-bottom-40">
-        <table id="order-list" class="table table-hover datatable">
+        <table id="orders-arriving-soon" class="table table-hover datatable">
             <thead>
                 <tr>
                     <th class="id">ID</th>
@@ -38,7 +38,64 @@
                 </tr>
             </thead>
             <tbody>
-            {% for order in order_list %}
+            {% for order in orders_arriving_soon %}
+                <tr>
+                    <td class="id">
+                        <a href="{{ order.get_absolute_url }}" data-modal-url="{% url 'ordertracking:modal' order.id %}">{{ order.id }}</a>
+                    </td>
+                    <td class="order-id">
+                        <a href="{{ order.get_order_url }}" target="_blank">{{ order.order_id }}</a>
+                    </td>
+                    <td class="brief">
+                        {{ order.brief }}
+                    </td>
+                    <td class="ordered">
+                        <i class="fa fa-shopping-cart"></i>
+                        <small>{{ order.order_days }}</small>
+                    </td>
+                    <td class="shipped {% if not order.shipping_date %}font-grey{% endif %}">
+                        <i class="fa fa-truck"></i>
+                        <small>{{ order.shipping_days }}</small>
+                    </td>
+                    <td class="shipping-nr">
+                        {% if order.shipping_nr %}
+                            <a href="{{ order.get_shipping_url }}" target="_blank">
+                                <i class="fa fa-map-marker"></i>
+                                <small>{{ order.shipping_nr }}</small>
+                            </a>
+                        {% else %}
+                            <i class="fa fa-map-marker font-grey"></i>
+                        {% endif %}
+                    </td>
+                    <td class="shipping-status">
+                        {{ order.shipping_status }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">Orders arrived today</div>
+    </div>
+    <div class="portlet-body margin-bottom-40">
+        <table id="orders-arrived-today" class="table table-hover datatable">
+            <thead>
+                <tr>
+                    <th class="id">ID</th>
+                    <th class="order-id">Order ID</th>
+                    <th class="brief">Brief</th>
+                    <th class="ordered"><i class="fa fa-shopping-cart"></i></th>
+                    <th class="shipped"><i class="fa fa-truck"></i></th>
+                    <th class="shipping-nr"><i class="fa fa-map-marker"></i></th>
+                    <th class="shipping-status">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for order in orders_arrived_today %}
                 <tr>
                     <td class="id">
                         <a href="{{ order.get_absolute_url }}" data-modal-url="{% url 'ordertracking:modal' order.id %}">{{ order.id }}</a>
