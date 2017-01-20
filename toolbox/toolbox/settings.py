@@ -215,7 +215,7 @@ SHIPPING_URL = 'https://service.post.ch/EasyTrack/submitParcelData.do?formattedP
 TRACK_TRACE_LANGUAGE = 'en'
 
 SHIPPING_STATUS_ARRIVING_SOON = (
-    'Arrival at border point in the destination country'
+    'Arrival at border point in the destination country',
     'Handed to customs',
     'Postal customs clearance process underway',
     'Registered for collection',
