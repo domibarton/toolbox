@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    $('table#order-list tbody td.id a').click(function(e)
+    $('table.order-list tbody td.id a').click(function(e)
     {
         e.preventDefault();
 
