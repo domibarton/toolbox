@@ -222,7 +222,10 @@ SHIPPING_STATUS_ARRIVING_SOON = (
     'Delivered',
 )
 
-SHIPPING_STATUS_DELIVERED = 'Delivered'
+SHIPPING_STATUS_DELIVERED = (
+    'Delivered',
+    'Delivered via pigeon-hole',
+)
 
 #
 # Load custom settings.

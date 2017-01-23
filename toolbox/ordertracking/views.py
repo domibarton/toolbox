@@ -108,7 +108,7 @@ class OrderUpdateShippingStatusView(ListView):
             for n, e in TrackAndTrace.get_shipping_events(orders.keys()).iteritems():
                 o = orders[n]
                 o.shipping_status = e
-                if e == SHIPPING_STATUS_DELIVERED and not o.delivery_date:
+                if e in SHIPPING_STATUS_DELIVERED and not o.delivery_date:
                     o.delivery_date = date.today()
                 o.save()
 
