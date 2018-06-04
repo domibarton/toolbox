@@ -2,6 +2,9 @@ $(document).ready(function()
 {
     $('table.order-list tbody td.id a').click(function(e)
     {
+        if(e.metaKey)
+            return;
+
         e.preventDefault();
 
         var order_id = $(this).text();
