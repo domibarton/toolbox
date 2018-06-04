@@ -19,6 +19,7 @@ class OrderCreateForm(ModelForm):
             'description',
             'price',
             'order_date',
+            'shipping_date',
             'state',
         )
 
@@ -29,18 +30,19 @@ class OrderCreateForm(ModelForm):
             Div(
                 Div('store', css_class='col-md-4'),
                 Div('order_id', css_class='col-md-4'),
-                Div('shipping_nr', css_class='col-md-4'),
-                css_class='row'
-            ),
-            Div(
-                Div('brief', css_class='col-md-8'),
                 Div('price', css_class='col-md-4'),
                 css_class='row'
             ),
+            'brief',
             'description',
             Div(
                 Div('order_date', css_class='col-md-6'),
                 Div('state', css_class='col-md-6'),
+                css_class='row'
+            ),
+            Div(
+                Div('shipping_date', css_class='col-md-6'),
+                Div('shipping_nr', css_class='col-md-6'),
                 css_class='row'
             ),
             ButtonHolder(
@@ -77,14 +79,10 @@ class OrderUpdateForm(ModelForm):
             Div(
                 Div('store', css_class='col-md-4'),
                 Div('order_id', css_class='col-md-4'),
-                Div('shipping_nr', css_class='col-md-4'),
-                css_class='row'
-            ),
-            Div(
-                Div('brief', css_class='col-md-8'),
                 Div('price', css_class='col-md-4'),
                 css_class='row'
             ),
+            'brief',
             'description',
             'notes',
             Div(
@@ -94,8 +92,9 @@ class OrderUpdateForm(ModelForm):
                 css_class='row'
             ),
             Div(
-                Div('complete', css_class='col-md-6'),
-                Div('state', css_class='col-md-6'),
+                Div('state', css_class='col-md-4'),
+                Div('shipping_nr', css_class='col-md-4'),
+                Div('complete', css_class='col-md-4'),
                 css_class='row'
             ),
             ButtonHolder(
