@@ -218,6 +218,7 @@ SHIPPING_STATUS_ARRIVING_SOON = (
     'Arrival at border point in the destination country',
     'Handed to customs',
     'Postal customs clearance process underway',
+    'Arrival at delivery post office',
     'Registered for collection',
     'Delivered',
 )
