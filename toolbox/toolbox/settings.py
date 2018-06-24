@@ -219,6 +219,7 @@ SHIPPING_STATUS_ARRIVING_SOON = (
     'Handed to customs',
     'Postal customs clearance process underway',
     'Arrival at delivery post office',
+    'Handover to domestic sorting',
     'Registered for collection',
     'Delivered',
 )
