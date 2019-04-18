@@ -50,7 +50,7 @@ class OrderIncompleteListView(OrderListView):
         return super(OrderIncompleteListView, self).get_queryset().filter(complete=False)
 
     def get_context_data(self):
-        context               = super(OrderListView, self).get_context_data()
+        context               = super(OrderIncompleteListView, self).get_context_data()
         context['incomplete'] = True
         return context
 
