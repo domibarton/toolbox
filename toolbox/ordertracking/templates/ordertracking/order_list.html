@@ -17,8 +17,13 @@ Order Tracking <small>List of orders</small>
 {% endblock %}
 
 {% block page_toolbar %}
-<a href="{% url 'ordertracking:update-shipping-status' %}" class="btn btn-outline grey-mint"><i class="fa fa-truck"></i> update shipping status</a>
-<a href="{% url 'ordertracking:create' %}" class="btn btn-outline grey-mint"><i class="fa fa-plus"></i> add new order</a>
+    {% if incomplete %}
+        <a href="{% url 'ordertracking:list-all' %}" class="btn btn-outline grey-mint"><i class="fa fa-filter"></i> list all</a>
+    {% else %}
+        <a href="{% url 'ordertracking:list' %}" class="btn btn-outline grey-mint"><i class="fa fa-filter"></i> list only incomplete</a>
+    {% endif %}
+    <a href="{% url 'ordertracking:update-shipping-status' %}" class="btn btn-outline grey-mint"><i class="fa fa-truck"></i> update shipping status</a>
+    <a href="{% url 'ordertracking:create' %}" class="btn btn-outline grey-mint"><i class="fa fa-plus"></i> add new order</a>
 {% endblock %}
 
 {% block page_content %}

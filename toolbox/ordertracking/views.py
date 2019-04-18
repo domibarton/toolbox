@@ -44,6 +44,17 @@ class OrderListView(ListView):
         return redirect('ordertracking:list')
 
 
+class OrderIncompleteListView(OrderListView):
+
+    def get_queryset(self):
+        return super(OrderIncompleteListView, self).get_queryset().filter(complete=False)
+
+    def get_context_data(self):
+        context               = super(OrderListView, self).get_context_data()
+        context['incomplete'] = True
+        return context
+
+
 class OrderModalView(DetailView):
     model = Order
 

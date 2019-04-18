@@ -5,8 +5,13 @@ from .views import *
 urlpatterns = [
     url(
         regex=r'^$',
-        view=OrderListView.as_view(),
+        view=OrderIncompleteListView.as_view(),
         name='list'
+    ),
+    url(
+        regex=r'^all/$',
+        view=OrderListView.as_view(),
+        name='list-all'
     ),
     url(
         regex=r'^create/$',
