@@ -41,7 +41,7 @@ class OrderListView(ListView):
                 orders.filter(shipping_date=None).update(shipping_date=date.today())
                 return redirect('ordertracking:update-shipping-nr', pks=','.join(order_ids))
 
-        return redirect('ordertracking:list')
+        return redirect(request.META.get('HTTP_REFERER') or 'ordertracking:list')
 
 
 class OrderIncompleteListView(OrderListView):
